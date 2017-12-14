@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-taf-site",
+  "version": "1.0.0",
+  "description": "陸上競技部用のウェブサイトをNode.jsで作成してます。",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walk8243/nodejs-taf-site.git"
+  },
+  "author": "walk8243",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/walk8243/nodejs-taf-site/issues"
+  },
+  "homepage": "https://github.com/walk8243/nodejs-taf-site#readme"
+}
