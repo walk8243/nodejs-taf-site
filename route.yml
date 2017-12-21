@@ -1,7 +1,14 @@
 "":
   title: "aaa"
+
 "test":
   title: "test"
+  children:
+    "test":
+      title: "test-test"
 "_num_":
   title: "route"
   var: "test_id"
+  children:
+    "test":
+      title: "num-test"

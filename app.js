@@ -32,6 +32,6 @@ function doRequest(request, response){
   }
 
   response.writeHead(200, {'Content-Type': 'text/plain'});
-  response.write('Site Open!' + url_title);
+  response.write('Site Open!\n' + url_title);
   response.end();
 }
