@@ -1,5 +1,7 @@
 const http  = require('http'),
-      url		= require('url');
+      fs		= require('fs'),
+      url		= require('url'),
+      yaml  = require('js-yaml');
 
 var export_function = require('./route.js');
 export_function.func1();

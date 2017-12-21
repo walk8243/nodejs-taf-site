@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/walk8243/nodejs-taf-site/issues"
   },
-  "homepage": "https://github.com/walk8243/nodejs-taf-site#readme"
+  "homepage": "https://github.com/walk8243/nodejs-taf-site#readme",
+  "dependencies": {
+    "js-yaml": "^3.10.0"
+  }
 }
