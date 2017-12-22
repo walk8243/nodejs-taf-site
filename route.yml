@@ -1,14 +1,19 @@
 "":
   title: "aaa"
+  page: "index"
 
 "test":
   title: "test"
+  page: "test"
   children:
     "test":
       title: "test-test"
+      page: "test/test"
 "_num_":
   title: "route"
+  page: "num"
   var: "test_id"
   children:
     "test":
       title: "num-test"
+      page: "page/test"
