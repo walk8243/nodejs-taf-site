@@ -9,6 +9,9 @@
     "test":
       title: "test-test"
       page: "test/test"
+"competition":
+  title: "competition"
+  page: "com"
 "_num_":
   title: "route"
   page: "num"
