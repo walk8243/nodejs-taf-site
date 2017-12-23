@@ -43,3 +43,8 @@ function loadTemplate(dirPath, tmpObj){
 pagingFuncs.index = function(data){
   console.log("index");
 }
+
+pagingFuncs.competition = function(data){
+  var comFunc = require('./page/competition.js');
+  comFunc.index();
+}
