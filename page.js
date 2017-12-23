@@ -10,11 +10,11 @@ var pagingFuncs = {};
 
 // `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
-  console.log(data);
+  // console.log(page);
   // 定義されているかどうかの確認
-  if(typeof pagingFuncs[page] === 'function'){
+  if(typeof pagingFuncs[page[0]] === 'function'){
     // console.log("Yes!");
-    pagingFuncs[page](data);
+    pagingFuncs[page[0]](page, data);
   }else{
     // console.log("No!");
   }
@@ -41,11 +41,11 @@ function loadTemplate(dirPath, tmpObj){
   }
 }
 
-pagingFuncs.index = function(data){
+pagingFuncs.index = function(page, data){
   console.log("index");
 }
 
-pagingFuncs.competition = function(data){
+pagingFuncs.competition = function(page, data){
   var comFunc = require('./page/competition.js');
   comFunc.index();
 }

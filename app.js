@@ -27,7 +27,7 @@ function doRequest(request, response){
     response.end();
     return;
   }else if(typeof url_result === 'object'){
-    url_page = url_result[0];
+    url_page = url_result[0].split('/');
     url_data = url_result[1];
     url_title = url_data.title;
 

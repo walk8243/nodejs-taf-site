@@ -17,7 +17,7 @@
       children:
         "_num_":
           title: "com-year"
-          page: "compeition/year"
+          page: "competition/year"
           var: "year_id"
 "_num_":
   title: "route"
