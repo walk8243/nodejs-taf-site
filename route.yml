@@ -11,7 +11,7 @@
       page: "test/test"
 "competition":
   title: "competition"
-  page: "com"
+  page: "competition"
 "_num_":
   title: "route"
   page: "num"

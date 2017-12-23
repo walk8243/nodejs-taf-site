@@ -5,11 +5,15 @@ var templateFiles = {};
 loadTemplate('./template', templateFiles);
 // console.log(templateFiles);
 
+// ページングで使用する関数を入れるオブジェクト
+var pagingFuncs = {};
 
-
+// `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
-  if(typeof eval(page) === 'function'){
-    eval(page + "(data)"); // `route.yml`で指定している関数にジャンプ
+  // 定義されているかどうかの確認
+  if(typeof pagingFuncs[page] === 'function'){
+    // console.log("Yes!");
+    pagingFuncs[page](data);
   }else{
     // console.log("No!");
   }
@@ -29,7 +33,6 @@ function loadTemplate(dirPath, tmpObj){
       }else if(file.isFile()){
         tmp = files[i].split('.');
         if(tmp[1] == 'ejs'){
-          console.log(filePath);
           tmpObj[tmp[0]] = fs.readFileSync(filePath, 'utf8');
         }
       }
@@ -37,6 +40,6 @@ function loadTemplate(dirPath, tmpObj){
   }
 }
 
-function index(data){
+pagingFuncs.index = function(data){
   console.log("index");
 }
