@@ -50,37 +50,61 @@ function decisionPath(param, thisRoute, returnData){
   // console.log(Object.keys(thisRoute));
   for(var key in thisRoute){
     if(key == param){
-      returnData[0] = thisRoute[key].page;
-      data = {};
-      data['title'] = thisRoute[key].title;
-      returnData[1] = data;
-      if(thisRoute[key].children){
-        return thisRoute[key].children;
-      }
-      return true;
-    }else if(key == "_num_"){
-      if(param.match(/\d+/i)){
+      if(thisRoute[key].page){
         returnData[0] = thisRoute[key].page;
         data = {};
         data['title'] = thisRoute[key].title;
-        data[thisRoute[key].var] = param;
+        data['page'] = thisRoute[key].page;
         returnData[1] = data;
         if(thisRoute[key].children){
           return thisRoute[key].children;
+        }else{
+          return true;
         }
-        return true;
+      }else{
+        if(thisRoute[key].children){
+          return thisRoute[key].children;
+        }
+      }
+    }else if(key == "_num_"){
+      if(param.match(/\d+/i)){
+        if(thisRoute[key].page){
+          returnData[0] = thisRoute[key].page;
+          data = {};
+          data['title'] = thisRoute[key].title;
+          data['page'] = thisRoute[key].page;
+          data[thisRoute[key].var] = param;
+          returnData[1] = data;
+          if(thisRoute[key].children){
+            return thisRoute[key].children;
+          }else{
+            return true;
+          }
+        }else{
+          if(thisRoute[key].children){
+            return thisRoute[key].children;
+          }
+        }
       }
     }else if(key == "_string_"){
       if(param.match(/\w+/i)){
-        returnData[0] = thisRoute[key].page;
-        data = {};
-        data['title'] = thisRoute[key].title;
-        data[thisRoute[key].var] = param;
-        returnData[1] = data;
-        if(thisRoute[key].children){
-          return thisRoute[key].children;
+        if(thisRoute[key].page){
+          returnData[0] = thisRoute[key].page;
+          data = {};
+          data['title'] = thisRoute[key].title;
+          data['page'] = thisRoute[key].page;
+          data[thisRoute[key].var] = param;
+          returnData[1] = data;
+          if(thisRoute[key].children){
+            return thisRoute[key].children;
+          }else{
+            return true;
+          }
+        }else{
+          if(thisRoute[key].children){
+            return thisRoute[key].children;
+          }
         }
-        return true;
       }
     }
   }

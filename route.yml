@@ -12,6 +12,13 @@
 "competition":
   title: "competition"
   page: "competition"
+  children:
+    "year":
+      children:
+        "_num_":
+          title: "com-year"
+          page: "compeition/year"
+          var: "year_id"
 "_num_":
   title: "route"
   page: "num"

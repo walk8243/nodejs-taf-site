@@ -10,6 +10,7 @@ var pagingFuncs = {};
 
 // `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
+  console.log(data);
   // 定義されているかどうかの確認
   if(typeof pagingFuncs[page] === 'function'){
     // console.log("Yes!");
