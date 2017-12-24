@@ -6,7 +6,8 @@ loadTemplate('./template', templateFiles);
 // console.log(templateFiles);
 
 // ページングで使用する関数を入れるオブジェクト
-var pagingFuncs = {};
+pagingFuncs = setPagingFunc('./page');
+console.log(pagingFuncs);
 
 // `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
@@ -41,11 +42,30 @@ function loadTemplate(dirPath, tmpObj){
   }
 }
 
-pagingFuncs.index = function(page, data){
-  console.log("index");
-}
+// `page`フォルダに存在する全ての`js`ファイルを関数として読み込む
+function setPagingFunc(dirPath){
+  var pagingFuncs = {};
+  if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()){
+    var files = fs.readdirSync(dirPath);
+    for(var i in files){
+      filePath = dirPath + "/" + files[i];
+      file = fs.statSync(filePath);
+      // console.log(filePath);
+      if(file.isDirectory()){
+        pagingFuncs[files[i]] = setPagingFunc(filePath);
+      }else if(file.isFile()){
+        tmp = files[i].split('.');
+        if(tmp[1] == 'js'){
+          tmpObj = require(filePath);
+          for (var key in tmpObj) {
+            if (tmpObj.hasOwnProperty(key)) {
+              pagingFuncs[key] = tmpObj[key];
+            }
+          }
+        }
+      }
+    }
+  }
 
-pagingFuncs.competition = function(page, data){
-  var comFunc = require('./page/competition.js');
-  comFunc.index();
+  return pagingFuncs;
 }

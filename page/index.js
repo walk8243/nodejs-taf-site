@@ -1,3 +1,3 @@
 exports.index = function(){
-  console.log("compeition");
+  console.log("index");
 }
