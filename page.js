@@ -7,17 +7,17 @@ loadTemplate('./template', templateFiles);
 
 // ページングで使用する関数を入れるオブジェクト
 pagingFuncs = setPagingFunc('./page');
-console.log(pagingFuncs);
+// console.log(pagingFuncs);
 
 // `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
   // console.log(page);
   // 定義されているかどうかの確認
   if(typeof pagingFuncs[page[0]] === 'function'){
-    // console.log("Yes!");
     pagingFuncs[page[0]](page, data);
+  }else if(typeof pagingFuncs[page[0]]['index'] === 'function'){
+    pagingFuncs[page[0]]['index'](page, data);
   }else{
-    // console.log("No!");
   }
 }
 
