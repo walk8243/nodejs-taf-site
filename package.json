@@ -4,7 +4,9 @@
   "description": "陸上競技部用のウェブサイトをNode.jsで作成してます。",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "app": "NODE_ENV=product node app.js",
+    "dev": "NODE_ENV=development node app.js",
+    "test": "NODE_ENV=test node app.js"
   },
   "repository": {
     "type": "git",

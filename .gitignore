@@ -1,2 +1,5 @@
 # node_modules以下を無視する
 node_modules/
+
+# config/product.ymlを無視する
+config/product.yml
