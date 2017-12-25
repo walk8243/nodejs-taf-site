@@ -1,5 +1,12 @@
 const fs		= require('fs');
 
+// var checkMysql = typeof mysqlConnection;
+// if(checkMysql){
+//   console.log(checkMysql);
+// }else{
+//   console.log('No!');
+// }
+
 // テンプレートファイルの読み込み
 var templateFiles = {};
 loadTemplate('./template', templateFiles);

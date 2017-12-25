@@ -1,3 +1,9 @@
 account:
   name: "walk8243"
   mail: "walk8243@gmail.com"
+
+mysql:
+  host: "localhost"
+  user: "test"
+  pass: "password_test"
+  database: "test"

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/walk8243/nodejs-taf-site#readme",
   "dependencies": {
     "config": "^1.28.1",
-    "js-yaml": "^3.10.0"
+    "js-yaml": "^3.10.0",
+    "mysql": "^2.15.0"
   }
 }

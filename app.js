@@ -1,6 +1,16 @@
 const http  = require('http'),
       fs		= require('fs'),
-      url		= require('url');
+      url		= require('url'),
+      mysql	= require('mysql'),
+      ConfigFile	= require('config');
+
+// mysqlの接続設定
+mysqlConnection = mysql.createConnection({
+	host		: ConfigFile.mysql.host,
+	user		: ConfigFile.mysql.user,
+	password: ConfigFile.mysql.pass,
+	database: ConfigFile.mysql.database
+});
 
 var export_function = {};
 export_function.route = require('./route.js');
