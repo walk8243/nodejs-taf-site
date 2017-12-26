@@ -10,6 +10,7 @@ const fs		= require('fs');
 // テンプレートファイルの読み込み
 templateFiles = {};
 loadTemplate('./template', templateFiles);
+setCommonTemplate(templateFiles);
 // console.log(templateFiles);
 
 // ページングで使用する関数を入れるオブジェクト
@@ -29,6 +30,40 @@ exports.pages = function(page, data){
   htmlData = selectPageFunc(page, data);
 
   return htmlData;
+}
+
+selectTemplate = function(page){
+  var tmpObj = templateFiles;
+  for(var i in page){
+    if(page.hasOwnProperty(i)){
+      tmpObj = tmpObj[page[i]];
+    }
+  }
+
+  if(typeof tmpObj === 'object'){
+    return tmpObj.index;
+  }else if(typeof tmpObj === 'string'){
+    return tmpObj;
+  }else{
+    return false;
+  }
+}
+
+selectPage = function(page){
+  var tmpFunc = pagingFuncs;
+  for(var i in page){
+    if(page.hasOwnProperty(i)){
+      tmpFunc = tmpFunc[page[i]];
+    }
+  }
+
+  if(typeof tmpFunc === 'function'){
+    return tmpFunc;
+  }else if(typeof tmpFunc.index === 'function'){
+    return tmpFunc.index;
+  }else{
+    return false;
+  }
 }
 
 // `template`フォルダに存在する全ての`ejs`ファイルを読み込む
@@ -80,37 +115,20 @@ function setPagingFunc(dirPath){
   return pagingFuncs;
 }
 
-selectTemplate = function(data){
-  var tmpObj = templateFiles;
-  var dirPiece = (data.page).split('/');
-  for (var i in dirPiece) {
-    if (dirPiece.hasOwnProperty(i)) {
-      tmpObj = tmpObj[dirPiece[i]];
+function setCommonTemplate(tmpObj){
+  var commonTemplate = templateFiles.common;
+  for(var key in tmpObj){
+    if(tmpObj.hasOwnProperty(key) && key!="common"){
+      if(typeof tmpObj[key] == 'object'){
+        setCommonTemplate(tmpObj[key]);
+      }else if(typeof tmpObj[key] == 'string'){
+        for(var mass in commonTemplate){
+          if(commonTemplate.hasOwnProperty(mass)){
+            tmpObj[key] = tmpObj[key].replace(new RegExp('<%'+mass+'%>', 'g'), commonTemplate[mass]);
+          }
+        }
+      }
+      // setCommonTemplate(tmpObj[key]);
     }
-  }
-
-  if(typeof tmpObj === 'object'){
-    return tmpObj.index;
-  }else if(typeof tmpObj === 'string'){
-    return tmpObj;
-  }else{
-    return false;
-  }
-}
-
-selectPage = function(page){
-  var tmpFunc = pagingFuncs;
-  for (var i in page) {
-    if (page.hasOwnProperty(i)) {
-      tmpFunc = tmpFunc[page[i]];
-    }
-  }
-
-  if(typeof tmpFunc === 'function'){
-    return tmpFunc;
-  }else if(typeof tmpFunc.index === 'function'){
-    return tmpFunc.index;
-  }else{
-    return false;
   }
 }
