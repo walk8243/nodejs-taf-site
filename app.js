@@ -4,6 +4,8 @@ const http  = require('http'),
       mysql	= require('mysql'),
       ConfigFile	= require('config');
 
+ejs = require('ejs');
+
 // mysqlの接続設定
 mysqlConnection = mysql.createConnection({
 	host		: ConfigFile.mysql.host,
@@ -22,7 +24,7 @@ server.listen(1234);
 console.log('Server running!');
 
 function doRequest(request, response){
-  var url_parts = url.parse(request.url);
+  var url_parts = url.parse(request.url), htmlData = "";
 
   if(url_parts.pathname == '/favicon.ico'){
     return;
@@ -41,14 +43,13 @@ function doRequest(request, response){
     url_data = url_result[1];
     url_title = url_data.title;
 
-    export_function.page.pages(url_page, url_data);
+    htmlData = export_function.page.pages(url_page, url_data);
   }else{
     url_page = "";
     url_title = url_result;
     url_data = {};
   }
 
-  response.writeHead(200, {'Content-Type': 'text/plain'});
-  response.write('Site Open!\n' + url_title);
-  response.end();
+  response.writeHead(200, {'Content-Type': 'text/html'});
+  response.end(htmlData);
 }

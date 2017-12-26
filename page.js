@@ -8,7 +8,7 @@ const fs		= require('fs');
 // }
 
 // テンプレートファイルの読み込み
-var templateFiles = {};
+templateFiles = {};
 loadTemplate('./template', templateFiles);
 // console.log(templateFiles);
 
@@ -18,14 +18,17 @@ pagingFuncs = setPagingFunc('./page');
 
 // `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
+  var htmlData = "";
   // console.log(page);
+
   // 定義されているかどうかの確認
-  if(typeof pagingFuncs[page[0]] === 'function'){
-    pagingFuncs[page[0]](page, data);
-  }else if(typeof pagingFuncs[page[0]]['index'] === 'function'){
-    pagingFuncs[page[0]]['index'](page, data);
-  }else{
+  var selectPageFunc = selectPage(page);
+  if(selectPageFunc === false){
+    return htmlData;
   }
+  htmlData = selectPageFunc(page, data);
+
+  return htmlData;
 }
 
 // `template`フォルダに存在する全ての`ejs`ファイルを読み込む
@@ -75,4 +78,39 @@ function setPagingFunc(dirPath){
   }
 
   return pagingFuncs;
+}
+
+selectTemplate = function(data){
+  var tmpObj = templateFiles;
+  var dirPiece = (data.page).split('/');
+  for (var i in dirPiece) {
+    if (dirPiece.hasOwnProperty(i)) {
+      tmpObj = tmpObj[dirPiece[i]];
+    }
+  }
+
+  if(typeof tmpObj === 'object'){
+    return tmpObj.index;
+  }else if(typeof tmpObj === 'string'){
+    return tmpObj;
+  }else{
+    return false;
+  }
+}
+
+selectPage = function(page){
+  var tmpFunc = pagingFuncs;
+  for (var i in page) {
+    if (page.hasOwnProperty(i)) {
+      tmpFunc = tmpFunc[page[i]];
+    }
+  }
+
+  if(typeof tmpFunc === 'function'){
+    return tmpFunc;
+  }else if(typeof tmpFunc.index === 'function'){
+    return tmpFunc.index;
+  }else{
+    return false;
+  }
 }

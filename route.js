@@ -14,6 +14,7 @@ exports.routes = function(pathname){
     returnData[0] = 'index';
     data = {};
     data['title'] = route[""].title;
+    data['page'] = route[""].page;
     returnData[1] = data;
     return returnData;
   }
