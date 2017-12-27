@@ -1,12 +1,3 @@
-const fs		= require('fs');
-
-// var checkMysql = typeof mysqlConnection;
-// if(checkMysql){
-//   console.log(checkMysql);
-// }else{
-//   console.log('No!');
-// }
-
 // テンプレートファイルの読み込み
 templateFiles = {};
 loadTemplate('./template', templateFiles);
@@ -32,6 +23,7 @@ exports.pages = function(page, data){
   return htmlData;
 }
 
+// 使用するテンプレートオブジェクトを探索する
 selectTemplate = function(page){
   var tmpObj = templateFiles;
   for(var i in page){
@@ -49,6 +41,7 @@ selectTemplate = function(page){
   }
 }
 
+// 使用するページ表示関数を探索する
 selectPage = function(page){
   var tmpFunc = pagingFuncs;
   for(var i in page){
@@ -64,6 +57,19 @@ selectPage = function(page){
   }else{
     return false;
   }
+}
+
+// ページをレンダリングする
+renderPage = function(template, postData){
+  var ejsData = {};
+  ejsData.data = data;
+  for(var key in postData){
+    if(postData.hasOwnProperty(key)){
+      ejsData[key] = postData[key];
+    }
+  }
+
+  return ejs.render(template, ejsData);
 }
 
 // `template`フォルダに存在する全ての`ejs`ファイルを読み込む
@@ -128,7 +134,6 @@ function setCommonTemplate(tmpObj){
           }
         }
       }
-      // setCommonTemplate(tmpObj[key]);
     }
   }
 }

@@ -1,5 +1,4 @@
-const fs		= require('fs'),
-      yaml  = require('js-yaml');
+const yaml  = require('js-yaml');
 
 var route;
 try{

@@ -6,7 +6,7 @@ exports.index = function(page, data){
     template = selectTemplate(page);
   }
 
-  return ejs.render(template, {
+  return renderPage(template, {
     title: data.title
   });
 }

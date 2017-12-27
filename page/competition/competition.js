@@ -6,7 +6,7 @@ exports.competition = function(page, data){
     template = selectTemplate(page);
   }
 
-  return ejs.render(template, {
+  return renderPage(template, {
     com_id: data.com_id
   });
 }

@@ -1,10 +1,10 @@
 const http  = require('http'),
-      fs		= require('fs'),
       url		= require('url'),
       mysql	= require('mysql'),
       ConfigFile	= require('config');
 
-ejs = require('ejs');
+ejs   = require('ejs');
+fs    = require('fs');
 
 // mysqlの接続設定
 mysqlConnection = mysql.createConnection({
