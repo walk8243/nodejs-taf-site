@@ -7,65 +7,92 @@
 | event | 種目 |
 | round | ラウンド |
 | special | トップページに作られる特設ページ |
-| link | 他サイトのリンク |
+| link | 他サイトへのリンク |
 | administrator | ウェブサイトの管理者情報 |
+| link_category | 他サイトへのリンクのカテゴリー |
 
 # resultテーブル
-| キー名 | 目的 | 型 | 主キー | 外部キー |
-|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(11) | ◯ |  |
-| result | 結果 | varchar |  |  |
-| competition | 試合 | int(11) |  | competition |
-| event | 種目 | int(5) |  | event |
-| round | ラウンド | int(2) |  | round |
-| member | 部員 | int(11) |  | member |
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| result | 結果 | varchar |  |  |  |  |
+| competition | 試合 | int(11) |  |  | competition |  |
+| event | 種目 | int(5) |  |  | event |  |
+| round | ラウンド | int(2) |  |  | round |  |
+| member | 部員 | int(11) |  |  | member |  |
+| del_flag | 削除フラッグ | bool | false |  |  |  |
 
 # competitionテーブル
-| キー名 | 目的 | 型 | 主キー | 外部キー |
-|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(11) | ◯ |  |
-| competition | 試合名 | varchar |  |  |
-| place | 場所 | varchar |  |  |
-| start | 開始日 | date |  |  |
-| end | 終了日 | date |  |  |
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  |
+| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| competition | 試合名 | varchar |  |  |  |  |
+| place | 場所 | varchar |  |  |  |  |
+| start | 開始日 | date |  |  |  |  |
+| end | 終了日 | date |  |  |  |  |
+| del_flag | 削除フラッグ | bool | false |  |  |  |
 
 # memberテーブル
-| キー名 | 目的 | 型 | 主キー | 外部キー |
-|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(11) | ◯ |  |
-| name1 | 姓 | varchar |  |  |
-| name2 | 名 | varchar |  |  |
-| phonetic1 | 姓（ふりがな） | varchar |  |  |
-| phonetic2 | 名（ふりがな） | varchar |  |  |
-| sex | 性別 | enum('男子', '女子') |  |  |
-| grade | 学年 | int(3) |  |  |
-| degree | 学位 | varchar |  |  |
-| expert | 専門 | varchar |  |  |
-| graduate | 出身高校 | varchar |  |  |
-| position | 幹部役職 | varchar |  |  |
-| image | 顔写真 | mediumblob |  |  |
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| name1 | 姓 | varchar |  |  |  |  |
+| name2 | 名 | varchar |  |  |  |  |
+| phonetic1 | 姓（ふりがな） | varchar |  |  |  |  |
+| phonetic2 | 名（ふりがな） | varchar |  |  |  |  |
+| sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
+| grade | 学年 | int(3) |  |  |  |  |
+| degree | 学位 | varchar |  |  |  |  |
+| expert | 専門 | varchar |  |  |  |  |
+| graduate | 出身高校 | varchar |  |  |  |  |
+| position | 幹部役職 | varchar |  |  |  |  |
+| image | 顔写真 | mediumblob | NULL |  |  |  |
+| del_flag | 削除フラッグ | bool | false |  |  |  |
 
 # eventテーブル
-| キー名 | 目的 | 型 | 主キー | 外部キー |
-|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(5) | ◯ |  |
-| event | 種目名 | varchar |  |  |
-| sex | 性別 | enum('男子', '女子') |  |  |
-| record | 歴代記録に残すか | bool |  |  |
-| order | 並び順 | int(5) |  |  |
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(5) |  | ◯ |  | auto_increment |
+| event | 種目名 | varchar |  |  |  |  |
+| sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
+| record | 歴代記録に残すか | bool | false |  |  |  |
+| order | 並び順 | int(5) |  |  |  |  |
 
 # roundテーブル
-
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(2) |  | ◯ |  | auto_increment |
+| round | ラウンド名 | varchar |  |  |  |  |
+| order | 並び順 | int(2) |  |  |  |  |
 
 # specialテーブル
-
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(5) |  | ◯ |  | auto_increment |
+| special | ページ名 | varchar |  |  |  |  |
+| order | 並び順 | int(5) |  |  |  |  |
+| display | 表示 | bool | false |  |  |  |
+| del_flag | 削除フラッグ | bool | false |  |  |  |
 
 # linkテーブル
-
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(5) |  | ◯ |  | auto_increment |
+| link | サイト名 | varchar |  |  |  |  |
+| url | リンク先URL | varchar | NULL |  |  |  |
+| category | カテゴリー | int(2) | false |  | link_category |  |
+| del_flag | 削除フラッグ | bool | false |  |  |  |
 
 # administratorテーブル
-| キー名 | 目的 | 型 | 主キー | 外部キー |
-|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(3) | ◯ |  |
-| member | 部員 | int(11) |  | member |
-| mail | メールアドレス | varchar |  |  |
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(3) |  | ◯ |  | auto_increment |
+| member | 部員 | int(11) |  |  | member |  |
+| mail | メールアドレス | varchar |  |  |  |  |
+
+# link_categoryテーブル
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(2) |  | ◯ |  | auto_increment |
+| category | カテゴリー名 | varchar |  |  |  |  |
+| order | メールアドレス | int(2) |  |  |  |  |
