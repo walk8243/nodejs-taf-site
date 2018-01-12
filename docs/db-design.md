@@ -6,6 +6,7 @@
 | member | 部員情報 |
 | event | 種目 |
 | round | ラウンド |
+| relay | リレーのメンバー |
 | special | トップページに作られる特設ページ |
 | link | 他サイトへのリンク |
 | administrator | ウェブサイトの管理者情報 |
@@ -57,6 +58,7 @@
 | sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
 | record | 歴代記録に残すか | bool | false |  |  |  |
 | order | 並び順 | int(5) |  |  |  |  |
+| relay_flag | リレーフラッグ | bool | false |  |  |  |
 
 # roundテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -64,6 +66,14 @@
 | id | 主キー | int(2) |  | ◯ |  | auto_increment |
 | round | ラウンド名 | varchar |  |  |  |  |
 | order | 並び順 | int(2) |  |  |  |  |
+
+# relayテーブル
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(2) |  | ◯ |  | auto_increment |
+| result | 対応する結果 | int(11) |  |  | result |  |
+| order | 走順 | int(2) |  |  |  |  |
+| member | 選手 | int(2) |  |  | member |  |
 
 # specialテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
