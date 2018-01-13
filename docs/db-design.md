@@ -6,7 +6,8 @@
 | member | 部員情報 |
 | event | 種目 |
 | round | ラウンド |
-| relay | リレーのメンバー |
+| relay | リレー・駅伝のチーム情報 |
+| relay_member | リレー・駅伝の個人情報 |
 | special | トップページに作られる特設ページ |
 | link | 他サイトへのリンク |
 | administrator | ウェブサイトの管理者情報 |
@@ -70,10 +71,19 @@
 # relayテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(2) |  | ◯ |  | auto_increment |
-| result | 対応する結果 | int(11) |  |  | result |  |
+| result | 主キー | int(11) |  |  | result |  |
+| team | チーム名 | varchar | '和歌山大' |  |  |  |
+
+# relay_memberテーブル
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| result | 主キー | int(11) |  |  | result |  |
 | order | 走順 | int(2) |  |  |  |  |
-| member | 選手 | int(2) |  |  | member |  |
+| belong | 所属 | varchar | '和歌山大' |  |  |  |
+| member | 選手（和大所属の場合） | int(2) | NULL |  | member |  |
+| name | 選手名(和大以外の所属の場合) | varchar | NULL |  |  |  |
+| amount_record | 通過タイム | varchar | NULL |  |  |  |
+| section_record | 区間タイム | varchar | NULL |  |  |  |
 
 # specialテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
