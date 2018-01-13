@@ -60,6 +60,7 @@
 | record | 歴代記録に残すか | bool | false |  |  |  |
 | order | 並び順 | int(5) |  |  |  |  |
 | relay_flag | リレーフラッグ | bool | false |  |  |  |
+| conbined_flag | 混成フラッグ | bool | false |  |  |  |
 
 # roundテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -71,19 +72,26 @@
 # relayテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| result | 主キー | int(11) |  |  | result |  |
+| result | 主キー | int(11) |  | ◯ | result |  |
 | team | チーム名 | varchar | '和歌山大' |  |  |  |
 
 # relay_memberテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| result | 主キー | int(11) |  |  | result |  |
+| result | 主キー | int(11) |  | ◯ | result |  |
 | order | 走順 | int(2) |  |  |  |  |
 | belong | 所属 | varchar | '和歌山大' |  |  |  |
 | member | 選手（和大所属の場合） | int(2) | NULL |  | member |  |
 | name | 選手名(和大以外の所属の場合) | varchar | NULL |  |  |  |
 | amount_record | 通過タイム | varchar | NULL |  |  |  |
 | section_record | 区間タイム | varchar | NULL |  |  |  |
+
+# combinedテーブル
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| result | 主キー | int(11) |  | ◯ | result |  |
+| score | 点数 | int(3) | 0 |  |  |  |
+| parent | 親result | int(11) |  |  |  |  |
 
 # specialテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
