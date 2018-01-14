@@ -10,8 +10,8 @@
 | relay_member | リレー・駅伝の個人情報 |
 | special | トップページに作られる特設ページ |
 | link | 他サイトへのリンク |
-| administrator | ウェブサイトの管理者情報 |
 | link_category | 他サイトへのリンクのカテゴリー |
+| administrator | ウェブサイトの管理者情報 |
 | image | サイト全体で使用出来る画像 |
 
 # resultテーブル
@@ -92,7 +92,7 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | result | 主キー | int(11) |  | ◯ | result | NOT NULL |
 | score | 点数 | int(3) | 0 |  |  |  |
-| parent | 親result | int(11) |  |  |  |  |
+| parent | 親result | int(11) |  |  |  | NOT NULL |
 
 # specialテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -112,19 +112,19 @@
 | category | カテゴリー | int(2) | false |  | link_category |  |
 | del_flag | 削除フラッグ | bool | false |  |  |  |
 
+# link_categoryテーブル
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
+| category | カテゴリー名 | varchar |  |  |  |  |
+| order | 並び順 | int(2) |  |  |  |  |
+
 # administratorテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(3) |  | ◯ |  | NOT NULL, auto_increment |
 | member | 部員 | int(11) |  |  | member |  |
 | mail | メールアドレス | varchar |  |  |  |  |
-
-# link_categoryテーブル
-| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
-| category | カテゴリー名 | varchar |  |  |  |  |
-| order | メールアドレス | int(2) |  |  |  |  |
 
 # imageテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
