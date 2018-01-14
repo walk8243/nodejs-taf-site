@@ -31,7 +31,7 @@
 | competition | 試合名 | varchar |  |  |  |  |
 | place | 場所 | varchar |  |  |  |  |
 | start | 開始日 | date |  |  |  |  |
-| end | 終了日 | date |  |  |  |  |
+| end | 終了日 | date | '0000-00-00' |  |  |  |
 | del_flag | 削除フラッグ | bool | false |  |  |  |
 
 # memberテーブル
@@ -44,10 +44,10 @@
 | phonetic2 | 名（ふりがな） | varchar |  |  |  |  |
 | sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
 | grade | 学年 | int(3) |  |  |  |  |
-| degree | 学位 | varchar |  |  |  |  |
+| degree | 学位 | enum('学位', '修士', '博士') | '学位' |  |  |  |
 | expert | 専門 | varchar |  |  |  |  |
 | graduate | 出身高校 | varchar |  |  |  |  |
-| position | 幹部役職 | varchar |  |  |  |  |
+| position | 幹部役職 | varchar | NULL |  |  |  |
 | image | 顔写真 | mediumblob | NULL |  |  |  |
 | del_flag | 削除フラッグ | bool | false |  |  |  |
 
