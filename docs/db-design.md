@@ -17,7 +17,7 @@
 # resultテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
 | result | 結果 | varchar |  |  |  |  |
 | competition | 試合 | int(11) |  |  | competition |  |
 | event | 種目 | int(5) |  |  | event |  |
@@ -28,7 +28,7 @@
 # competitionテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|  |
-| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
 | competition | 試合名 | varchar |  |  |  |  |
 | place | 場所 | varchar |  |  |  |  |
 | start | 開始日 | date |  |  |  |  |
@@ -38,7 +38,7 @@
 # memberテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
 | name1 | 姓 | varchar |  |  |  |  |
 | name2 | 名 | varchar |  |  |  |  |
 | phonetic1 | 姓（ふりがな） | varchar |  |  |  |  |
@@ -55,7 +55,7 @@
 # eventテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(5) |  | ◯ |  | auto_increment |
+| id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
 | event | 種目名 | varchar |  |  |  |  |
 | sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
 | record | 歴代記録に残すか | bool | false |  |  |  |
@@ -66,20 +66,20 @@
 # roundテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(2) |  | ◯ |  | auto_increment |
+| id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
 | round | ラウンド名 | varchar |  |  |  |  |
 | order | 並び順 | int(2) |  |  |  |  |
 
 # relayテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| result | 主キー | int(11) |  | ◯ | result |  |
+| result | 主キー | int(11) |  | ◯ | result | NOT NULL |
 | team | チーム名 | varchar | '和歌山大' |  |  |  |
 
 # relay_memberテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| result | 主キー | int(11) |  | ◯ | result |  |
+| result | 主キー | int(11) |  | ◯ | result | NOT NULL |
 | order | 走順 | int(2) |  |  |  |  |
 | belong | 所属 | varchar | '和歌山大' |  |  |  |
 | member | 選手（和大所属の場合） | int(2) | NULL |  | member |  |
@@ -90,14 +90,14 @@
 # combinedテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| result | 主キー | int(11) |  | ◯ | result |  |
+| result | 主キー | int(11) |  | ◯ | result | NOT NULL |
 | score | 点数 | int(3) | 0 |  |  |  |
 | parent | 親result | int(11) |  |  |  |  |
 
 # specialテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(5) |  | ◯ |  | auto_increment |
+| id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
 | special | ページ名 | varchar |  |  |  |  |
 | order | 並び順 | int(5) |  |  |  |  |
 | display | 表示 | bool | false |  |  |  |
@@ -106,7 +106,7 @@
 # linkテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(5) |  | ◯ |  | auto_increment |
+| id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
 | link | サイト名 | varchar |  |  |  |  |
 | url | リンク先URL | varchar | NULL |  |  |  |
 | category | カテゴリー | int(2) | false |  | link_category |  |
@@ -115,20 +115,20 @@
 # administratorテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(3) |  | ◯ |  | auto_increment |
+| id | 主キー | int(3) |  | ◯ |  | NOT NULL, auto_increment |
 | member | 部員 | int(11) |  |  | member |  |
 | mail | メールアドレス | varchar |  |  |  |  |
 
 # link_categoryテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(2) |  | ◯ |  | auto_increment |
+| id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
 | category | カテゴリー名 | varchar |  |  |  |  |
 | order | メールアドレス | int(2) |  |  |  |  |
 
 # imageテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
 | image | 画像 | mediumblob |  |  |  | NOT NULL |
 | unique_string | 識別文字列 | varchar(32) |  |  |  | NOT NULL |
