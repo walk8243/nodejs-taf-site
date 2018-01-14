@@ -12,6 +12,7 @@
 | link | 他サイトへのリンク |
 | administrator | ウェブサイトの管理者情報 |
 | link_category | 他サイトへのリンクのカテゴリー |
+| image | サイト全体で使用出来る画像 |
 
 # resultテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -124,3 +125,10 @@
 | id | 主キー | int(2) |  | ◯ |  | auto_increment |
 | category | カテゴリー名 | varchar |  |  |  |  |
 | order | メールアドレス | int(2) |  |  |  |  |
+
+# imageテーブル
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(11) |  | ◯ |  | auto_increment |
+| image | 画像 | mediumblob |  |  |  | NOT NULL |
+| unique_string | 識別文字列 | varchar(32) |  |  |  | NOT NULL |
