@@ -215,6 +215,13 @@
 | 駅伝 | '男子' | false | 73 | false | false |
 | 駅伝 | '女子' | false | 74 | false | false |
 
+## roundテーブル
+| round | order |
+|:---:|:---:|
+| 予選 | 1 |
+| 準決勝 | 2 |
+| 決勝 | 3 |
+
 ## constantテーブル
 | index | value | comment |
 |:---:|:---:|:---:|
