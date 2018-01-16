@@ -13,6 +13,8 @@
 | link_category | 他サイトへのリンクのカテゴリー |
 | administrator | ウェブサイトの管理者情報 |
 | image | サイト全体で使用出来る画像 |
+| constant | 定数 |
+
 
 # resultテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -132,3 +134,19 @@
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
 | image | 画像 | mediumblob |  |  |  | NOT NULL |
 | unique_string | 識別文字列 | varchar(32) |  |  |  | NOT NULL |
+
+# constantテーブル
+| キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
+| index | 変数名 | varchar(32) |  |  |  | UNIQUE KEY, NOT NULL |
+| value | 値 | varchar |  |  |  |  |
+| comment | 説明 | varchar | NULL |  |  |  |
+
+
+# 初期DB
+## constantテーブル
+| index | value | comment |
+|:---:|:---:|:---:|
+| admin_member | NULL | 管理者（member_id） |
+| admin_mail | NULL | 管理者メールアドレス |
