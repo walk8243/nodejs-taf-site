@@ -19,7 +19,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
-| result | 結果 | varchar |  |  |  | NOT NULL |
+| result | 結果 | varchar(128) |  |  |  | NOT NULL |
 | competition | 試合 | int(11) |  |  | competition |  |
 | event | 種目 | int(5) |  |  | event |  |
 | round | ラウンド | int(2) |  |  | round |  |
@@ -30,8 +30,8 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|  |
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
-| competition | 試合名 | varchar |  |  |  | NOT NULL |
-| place | 場所 | varchar |  |  |  |  |
+| competition | 試合名 | varchar(128) |  |  |  | NOT NULL |
+| place | 場所 | varchar(64) |  |  |  |  |
 | start | 開始日 | date |  |  |  |  |
 | end | 終了日 | date | '0000-00-00' |  |  |  |
 | del_flag | 削除フラッグ | boolean | false |  |  |  |
@@ -40,16 +40,16 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
-| name1 | 姓 | varchar |  |  |  |  |
-| name2 | 名 | varchar |  |  |  |  |
-| phonetic1 | 姓（ふりがな） | varchar |  |  |  |  |
-| phonetic2 | 名（ふりがな） | varchar |  |  |  |  |
+| name1 | 姓 | varchar(64) |  |  |  |  |
+| name2 | 名 | varchar(64) |  |  |  |  |
+| phonetic1 | 姓（ふりがな） | varchar(128) |  |  |  |  |
+| phonetic2 | 名（ふりがな） | varchar(128) |  |  |  |  |
 | sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
 | grade | 学年 | int(3) |  |  |  |  |
 | degree | 学位 | enum('学位', '修士', '博士') | '学位' |  |  |  |
-| expert | 専門 | varchar |  |  |  |  |
-| graduate | 出身高校 | varchar |  |  |  |  |
-| position | 幹部役職 | varchar | NULL |  |  |  |
+| expert | 専門 | varchar(32) |  |  |  |  |
+| graduate | 出身高校 | varchar(64) |  |  |  |  |
+| position | 幹部役職 | varchar(64) | NULL |  |  |  |
 | image | 顔写真 | mediumblob | NULL |  |  |  |
 | del_flag | 削除フラッグ | boolean | false |  |  |  |
 
@@ -57,7 +57,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
-| event | 種目名 | varchar |  |  |  | NOT NULL |
+| event | 種目名 | varchar(64) |  |  |  | NOT NULL |
 | sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
 | record | 歴代記録に残すか | boolean | false |  |  |  |
 | order | 並び順 | int(5) |  |  |  |  |
@@ -68,25 +68,25 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
-| round | ラウンド名 | varchar |  |  |  | NOT NULL |
+| round | ラウンド名 | varchar(32) |  |  |  | NOT NULL |
 | order | 並び順 | int(2) |  |  |  |  |
 
 # relayテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | result | 主キー | int(11) |  | ◯ | result | NOT NULL |
-| team | チーム名 | varchar | '和歌山大' |  |  | NOT NULL |
+| team | チーム名 | varchar(128) | '和歌山大' |  |  | NOT NULL |
 
 # relay_memberテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | result | 主キー | int(11) |  | ◯ | result | NOT NULL |
 | order | 走順 | int(2) |  |  |  |  |
-| belong | 所属 | varchar | '和歌山大' |  |  |  |
+| belong | 所属 | varchar(64) | '和歌山大' |  |  |  |
 | member | 選手（和大所属の場合） | int(2) | NULL |  | member |  |
-| name | 選手名(和大以外の所属の場合) | varchar | NULL |  |  |  |
-| amount_record | 通過タイム | varchar | NULL |  |  |  |
-| section_record | 区間タイム | varchar | NULL |  |  |  |
+| name | 選手名(和大以外の所属の場合) | varchar(256) | NULL |  |  |  |
+| amount_record | 通過タイム | varchar(128) | NULL |  |  |  |
+| section_record | 区間タイム | varchar(128) | NULL |  |  |  |
 
 # combinedテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -99,7 +99,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
-| special | ページ名 | varchar |  |  |  | NOT NULL |
+| special | ページ名 | varchar(128) |  |  |  | NOT NULL |
 | order | 並び順 | int(5) |  |  |  |  |
 | display | 表示 | boolean | false |  |  |  |
 | del_flag | 削除フラッグ | boolean | false |  |  |  |
@@ -108,8 +108,8 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
-| link | サイト名 | varchar |  |  |  | NOT NULL |
-| url | リンク先URL | varchar | NULL |  |  | NOT NULL |
+| link | サイト名 | varchar(128) |  |  |  | NOT NULL |
+| url | リンク先URL | varchar(256) | NULL |  |  | NOT NULL |
 | category | カテゴリー | int(2) | false |  | link_category |  |
 | del_flag | 削除フラッグ | boolean | false |  |  |  |
 
@@ -117,7 +117,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
-| category | カテゴリー名 | varchar |  |  |  | NOT NULL |
+| category | カテゴリー名 | varchar(64) |  |  |  | NOT NULL |
 | order | 並び順 | int(2) |  |  |  |  |
 
 # imageテーブル
@@ -132,8 +132,8 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
 | index | 変数名 | varchar(32) |  |  |  | UNIQUE KEY, NOT NULL |
-| value | 値 | varchar |  |  |  | NOT NULL |
-| comment | 説明 | varchar | NULL |  |  |  |
+| value | 値 | varchar(128) |  |  |  | NOT NULL |
+| comment | 説明 | varchar(1024) | NULL |  |  |  |
 
 
 # 初期DB
