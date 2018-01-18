@@ -7,7 +7,8 @@ var mysqlConnection = mysql.createConnection({
 	host		: ConfigFile.mysql.host,
 	user		: ConfigFile.mysql.user,
 	password: ConfigFile.mysql.pass,
-	database: ConfigFile.mysql.database
+	database: ConfigFile.mysql.database,
+  multipleStatements: true
 });
 
 mysqlConnection.connect(function(error){
