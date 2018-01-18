@@ -93,7 +93,7 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | result | 主キー | int(11) |  | ◯ | result | NOT NULL |
 | score | 点数 | int(3) | 0 |  |  |  |
-| parent | 親result | int(11) |  |  |  | NOT NULL |
+| parent | 親result | int(11) |  |  | result | NOT NULL |
 
 # specialテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
