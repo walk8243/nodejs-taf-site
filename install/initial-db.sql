@@ -64,3 +64,83 @@ CREATE TABLE IF NOT EXISTS result (
     REFERENCES member(`id`)
     ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+CREATE TABLE IF NOT EXISTS relay (
+  `result` INT(11) NOT NULL PRIMARY KEY,
+  `team` VARCHAR(128) NOT NULL DEFAULT '和歌山大' COMMENT 'チーム名',
+
+  FOREIGN KEY (`result`)
+    REFERENCES result(`id`)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS relay_member (
+  `result` INT(11) NOT NULL PRIMARY KEY,
+  `order` INT(2) COMMENT '走順',
+  `belong` VARCHAR(64) DEFAULT '和歌山大' COMMENT '所属',
+  `member` INT(2) DEFAULT NULL COMMENT '選手（和大所属の場合）',
+  `name` VARCHAR(256) DEFAULT NULL COMMENT '選手名(和大以外の所属の場合)',
+  `amount_record` VARCHAR(128) DEFAULT NULL COMMENT '通過タイム',
+  `section_record` VARCHAR(128) DEFAULT NULL COMMENT '区間タイム',
+
+  FOREIGN KEY (`result`)
+    REFERENCES result(`id`)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+
+  FOREIGN KEY (`member`)
+    REFERENCES member(`id`)
+    ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS combined (
+  `result` INT(11) NOT NULL PRIMARY KEY,
+  `score` INT(3) DEFAULT 0 COMMENT '点数',
+  `parent` INT(11) NOT NULL COMMENT '親result',
+
+  FOREIGN KEY (`result`)
+    REFERENCES result(`id`)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+
+  FOREIGN KEY (`parent`)
+    REFERENCES result(`id`)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS special (
+  `id` INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `special` VARCHAR(128) NOT NULL COMMENT 'ページ名',
+  `order` INT(5) COMMENT '並び順',
+  `display` BOOLEAN DEFAULT false COMMENT '表示',
+  `del_flag` BOOLEAN DEFAULT false COMMENT '削除フラッグ'
+);
+
+CREATE TABLE IF NOT EXISTS link_category (
+  `id` INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `category` VARCHAR(64) NOT NULL COMMENT 'カテゴリー名',
+  `order` INT(2) COMMENT '並び順'
+);
+
+CREATE TABLE IF NOT EXISTS link (
+  `id` INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `link` VARCHAR(128) NOT NULL COMMENT 'サイト名',
+  `url` VARCHAR(256) NOT NULL COMMENT 'リンク先URL',
+  `category` INT(2) DEFAULT NULL COMMENT 'カテゴリー',
+  `del_flag` BOOLEAN DEFAULT false COMMENT '削除フラッグ',
+
+  FOREIGN KEY (`category`)
+    REFERENCES link_category(`id`)
+    ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS image (
+  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `image` MEDIUMBLOB NOT NULL COMMENT '画像',
+  `unique_string` VARCHAR(32) NOT NULL COMMENT '識別文字列'
+);
+
+CREATE TABLE IF NOT EXISTS constant (
+  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `index` VARCHAR(32) NOT NULL UNIQUE COMMENT '変数名',
+  `value` VARCHAR(128) NOT NULL COMMENT '値',
+  `comment` VARCHAR(1024) DEFAULT NULL COMMENT '説明'
+);
