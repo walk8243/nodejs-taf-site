@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "app": "NODE_ENV=product node app.js",
+    "db": "NODE_ENV=product node install/db.js",
     "dev": "NODE_ENV=development node app.js",
     "test": "NODE_ENV=test node app.js"
   },
