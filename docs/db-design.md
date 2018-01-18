@@ -19,7 +19,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
-| result | 結果 | varchar |  |  |  |  |
+| result | 結果 | varchar |  |  |  | NOT NULL |
 | competition | 試合 | int(11) |  |  | competition |  |
 | event | 種目 | int(5) |  |  | event |  |
 | round | ラウンド | int(2) |  |  | round |  |
@@ -30,7 +30,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|  |
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
-| competition | 試合名 | varchar |  |  |  |  |
+| competition | 試合名 | varchar |  |  |  | NOT NULL |
 | place | 場所 | varchar |  |  |  |  |
 | start | 開始日 | date |  |  |  |  |
 | end | 終了日 | date | '0000-00-00' |  |  |  |
@@ -57,7 +57,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
-| event | 種目名 | varchar |  |  |  |  |
+| event | 種目名 | varchar |  |  |  | NOT NULL |
 | sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
 | record | 歴代記録に残すか | bool | false |  |  |  |
 | order | 並び順 | int(5) |  |  |  |  |
@@ -68,14 +68,14 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
-| round | ラウンド名 | varchar |  |  |  |  |
+| round | ラウンド名 | varchar |  |  |  | NOT NULL |
 | order | 並び順 | int(2) |  |  |  |  |
 
 # relayテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | result | 主キー | int(11) |  | ◯ | result | NOT NULL |
-| team | チーム名 | varchar | '和歌山大' |  |  |  |
+| team | チーム名 | varchar | '和歌山大' |  |  | NOT NULL |
 
 # relay_memberテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -99,7 +99,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
-| special | ページ名 | varchar |  |  |  |  |
+| special | ページ名 | varchar |  |  |  | NOT NULL |
 | order | 並び順 | int(5) |  |  |  |  |
 | display | 表示 | bool | false |  |  |  |
 | del_flag | 削除フラッグ | bool | false |  |  |  |
@@ -108,8 +108,8 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
-| link | サイト名 | varchar |  |  |  |  |
-| url | リンク先URL | varchar | NULL |  |  |  |
+| link | サイト名 | varchar |  |  |  | NOT NULL |
+| url | リンク先URL | varchar | NULL |  |  | NOT NULL |
 | category | カテゴリー | int(2) | false |  | link_category |  |
 | del_flag | 削除フラッグ | bool | false |  |  |  |
 
@@ -117,7 +117,7 @@
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(2) |  | ◯ |  | NOT NULL, auto_increment |
-| category | カテゴリー名 | varchar |  |  |  |  |
+| category | カテゴリー名 | varchar |  |  |  | NOT NULL |
 | order | 並び順 | int(2) |  |  |  |  |
 
 # imageテーブル
@@ -132,7 +132,7 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(11) |  | ◯ |  | NOT NULL, auto_increment |
 | index | 変数名 | varchar(32) |  |  |  | UNIQUE KEY, NOT NULL |
-| value | 値 | varchar |  |  |  |  |
+| value | 値 | varchar |  |  |  | NOT NULL |
 | comment | 説明 | varchar | NULL |  |  |  |
 
 
