@@ -109,8 +109,8 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
 | link | サイト名 | varchar(128) |  |  |  | NOT NULL |
-| url | リンク先URL | varchar(256) | NULL |  |  | NOT NULL |
-| category | カテゴリー | int(2) |  |  | link_category |  |
+| url | リンク先URL | varchar(256) |  |  |  | NOT NULL |
+| category | カテゴリー | int(2) | NULL |  | link_category |  |
 | del_flag | 削除フラッグ | boolean | false |  |  |  |
 
 # link_categoryテーブル
