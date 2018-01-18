@@ -24,7 +24,7 @@
 | event | 種目 | int(5) |  |  | event |  |
 | round | ラウンド | int(2) |  |  | round |  |
 | member | 部員 | int(11) |  |  | member |  |
-| del_flag | 削除フラッグ | bool | false |  |  |  |
+| del_flag | 削除フラッグ | boolean | false |  |  |  |
 
 # competitionテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -34,7 +34,7 @@
 | place | 場所 | varchar |  |  |  |  |
 | start | 開始日 | date |  |  |  |  |
 | end | 終了日 | date | '0000-00-00' |  |  |  |
-| del_flag | 削除フラッグ | bool | false |  |  |  |
+| del_flag | 削除フラッグ | boolean | false |  |  |  |
 
 # memberテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -51,7 +51,7 @@
 | graduate | 出身高校 | varchar |  |  |  |  |
 | position | 幹部役職 | varchar | NULL |  |  |  |
 | image | 顔写真 | mediumblob | NULL |  |  |  |
-| del_flag | 削除フラッグ | bool | false |  |  |  |
+| del_flag | 削除フラッグ | boolean | false |  |  |  |
 
 # eventテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -59,10 +59,10 @@
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
 | event | 種目名 | varchar |  |  |  | NOT NULL |
 | sex | 性別 | enum('男子', '女子') | '男子' |  |  |  |
-| record | 歴代記録に残すか | bool | false |  |  |  |
+| record | 歴代記録に残すか | boolean | false |  |  |  |
 | order | 並び順 | int(5) |  |  |  |  |
-| relay_flag | リレーフラッグ | bool | false |  |  |  |
-| conbined_flag | 混成フラッグ | bool | false |  |  |  |
+| relay_flag | リレーフラッグ | boolean | false |  |  |  |
+| conbined_flag | 混成フラッグ | boolean | false |  |  |  |
 
 # roundテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -101,8 +101,8 @@
 | id | 主キー | int(5) |  | ◯ |  | NOT NULL, auto_increment |
 | special | ページ名 | varchar |  |  |  | NOT NULL |
 | order | 並び順 | int(5) |  |  |  |  |
-| display | 表示 | bool | false |  |  |  |
-| del_flag | 削除フラッグ | bool | false |  |  |  |
+| display | 表示 | boolean | false |  |  |  |
+| del_flag | 削除フラッグ | boolean | false |  |  |  |
 
 # linkテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -111,7 +111,7 @@
 | link | サイト名 | varchar |  |  |  | NOT NULL |
 | url | リンク先URL | varchar | NULL |  |  | NOT NULL |
 | category | カテゴリー | int(2) | false |  | link_category |  |
-| del_flag | 削除フラッグ | bool | false |  |  |  |
+| del_flag | 削除フラッグ | boolean | false |  |  |  |
 
 # link_categoryテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
