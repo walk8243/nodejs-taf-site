@@ -1,4 +1,5 @@
-const mysql = require('mysql'),
+const fs    = require('fs'),
+      mysql = require('mysql'),
       ConfigFile	= require('config');
 
 // mysqlの接続設定
@@ -14,19 +15,15 @@ mysqlConnection.connect(function(error){
   console.log('Connected!');
 });
 
-var sql;
-sql = `CREATE TABLE IF NOT EXISTS event (
-  \`id\` INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  \`event\` VARCHAR(64) NOT NULL,
-  \`sex\` ENUM('男子', '女子') DEFAULT '男子',
-  \`record\` BOOLEAN DEFAULT false,
-  \`order\` INT(5),
-  \`relay_flag\` BOOLEAN DEFAULT false,
-  \`conbined_flag\` BOOLEAN DEFAULT false
-)`;
-mysqlConnection.query(sql, function(error, results, fields){
+fs.readFile('install/initial-db.sql', 'utf-8', function(error, sql){
   if(error){throw error;}
-  console.log(results);
-});
+  // console.log(sql);
 
-mysqlConnection.end();
+  mysqlConnection.query(sql, function(error, results, fields){
+    if(error){throw error;}
+    // console.log(results);
+
+    console.log('Completed!');
+    mysqlConnection.end();
+  });
+});
