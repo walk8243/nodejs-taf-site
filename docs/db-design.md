@@ -8,6 +8,7 @@
 | round | ラウンド |
 | relay | リレー・駅伝のチーム情報 |
 | relay_member | リレー・駅伝の個人情報 |
+| combined | 混成競技用に結果の連結 |
 | special | トップページに作られる特設ページ |
 | link | 他サイトへのリンク |
 | link_category | 他サイトへのリンクのカテゴリー |
@@ -62,7 +63,7 @@
 | record | 歴代記録に残すか | boolean | false |  |  |  |
 | order | 並び順 | int(5) |  |  |  |  |
 | relay_flag | リレーフラッグ | boolean | false |  |  |  |
-| conbined_flag | 混成フラッグ | boolean | false |  |  |  |
+| combined_flag | 混成フラッグ | boolean | false |  |  |  |
 
 # roundテーブル
 | キー名 | 目的 | 型 | デフォルト | 主キー | 外部キー |  |
@@ -138,7 +139,7 @@
 
 # 初期DB
 ## eventテーブル
-| event | sex | record | order | relay_flag | conbined_flag |
+| event | sex | record | order | relay_flag | combined_flag |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | 100m | '男子' | true | 1 | false | false |
 | 100m | '女子' | true | 2 | false | false |

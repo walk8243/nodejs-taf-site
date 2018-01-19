@@ -1,3 +1,4 @@
+-- テーブルの追加
 CREATE TABLE IF NOT EXISTS competition (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `competition` VARCHAR(128) NOT NULL COMMENT '試合名',
@@ -30,7 +31,7 @@ CREATE TABLE IF NOT EXISTS event (
   `record` BOOLEAN DEFAULT false COMMENT '歴代記録に残すか',
   `order` INT(5) COMMENT '並び順',
   `relay_flag` BOOLEAN DEFAULT false COMMENT 'リレーフラッグ',
-  `conbined_flag` BOOLEAN DEFAULT false COMMENT '混成フラッグ'
+  `combined_flag` BOOLEAN DEFAULT false COMMENT '混成フラッグ'
 );
 
 CREATE TABLE IF NOT EXISTS round (
