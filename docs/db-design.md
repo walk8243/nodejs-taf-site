@@ -137,7 +137,7 @@
 | comment | 説明 | varchar(1024) | NULL |  |  |  |
 
 
-# 初期DB
+# 初期データ
 ## eventテーブル
 | event | sex | record | order | relay_flag | combined_flag |
 |:---:|:---:|:---:|:---:|:---:|:---:|
