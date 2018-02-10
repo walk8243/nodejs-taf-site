@@ -34,6 +34,7 @@ function doRequest(request, response){
   var url_result = export_function.route.routes(url_parts.pathname);
   var url_title, url_page, url_data;
   if(url_result === false){
+    // 本来ここは404ページ
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write('param Error!');
     response.end();
