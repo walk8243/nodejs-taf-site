@@ -8,6 +8,10 @@ setCommonTemplate(templateFiles);
 pagingFuncs = setPagingFunc('./page');
 // console.log(pagingFuncs);
 
+// `lib`フォルダに格納されているファイルの読み込み
+libFiles = {};
+libFiles = loadLibFiles();
+
 // `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
   var htmlData = "";
@@ -21,6 +25,11 @@ exports.pages = function(page, data){
   htmlData = selectPageFunc(page, data);
 
   return htmlData;
+}
+
+//
+exports.lib = function(filename){
+  return libFiles[filename];
 }
 
 // 使用するテンプレートオブジェクトを探索する
@@ -136,4 +145,24 @@ function setCommonTemplate(tmpObj){
       }
     }
   }
+}
+
+// `lib`フォルダに存在する全てのファイルの読み込み（サブフォルダは読み込まない）
+function loadLibFiles(){
+  var contents = {}, dirPath = './lib';
+  if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()){
+    var files = fs.readdirSync(dirPath);
+    for(var i in files){
+      filePath = dirPath + "/" + files[i];
+      // console.log(filePath);
+      file = fs.statSync(filePath);
+      if(file.isFile()){
+        // console.log(file);
+        contents[files[i]] = fs.readFileSync(filePath);
+      }
+    }
+  }
+  // console.log(contents);
+
+  return contents;
 }

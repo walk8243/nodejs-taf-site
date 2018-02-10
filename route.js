@@ -8,6 +8,7 @@ try{
 }
 
 exports.routes = function(pathname){
+  // console.log(pathname);
   if(pathname == "/"){
     var returnData = [];
     returnData[0] = 'index';
@@ -15,6 +16,12 @@ exports.routes = function(pathname){
     data['title'] = route[""].title;
     data['page'] = route[""].page;
     returnData[1] = data;
+    return returnData;
+  }else if(pathname.match(/\/lib\//)){
+    // console.log("lib folder!");
+    var returnData = [];
+    returnData[0] = 'lib';
+    returnData[1] = pathname.substr(5);
     return returnData;
   }
 

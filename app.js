@@ -40,6 +40,13 @@ function doRequest(request, response){
     response.end();
     return;
   }else if(typeof url_result === 'object'){
+    if(url_result[0] == 'lib'){
+      response.writeHead(200, {'Content-Type': 'text/plain'});
+      response.write(export_function.page.lib(url_result[1]));
+      response.end();
+      return;
+    }
+
     url_page = url_result[0].split('/');
     url_data = url_result[1];
     url_title = url_data.title;
