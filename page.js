@@ -10,7 +10,8 @@ pagingFuncs = setPagingFunc('./page');
 
 // `lib`フォルダに格納されているファイルの読み込み
 libFiles = {};
-libFiles = loadLibFiles();
+loadLibFiles('./lib', libFiles);
+// console.log(libFiles);
 
 // `route.yml`で指定している関数を実行
 exports.pages = function(page, data){
@@ -148,21 +149,20 @@ function setCommonTemplate(tmpObj){
 }
 
 // `lib`フォルダに存在する全てのファイルの読み込み（サブフォルダは読み込まない）
-function loadLibFiles(){
-  var contents = {}, dirPath = './lib';
+function loadLibFiles(dirPath, contents){
   if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()){
     var files = fs.readdirSync(dirPath);
     for(var i in files){
       filePath = dirPath + "/" + files[i];
       // console.log(filePath);
       file = fs.statSync(filePath);
-      if(file.isFile()){
+      if(file.isDirectory()){
+        loadLibFiles(filePath, contents);
+      }else if(file.isFile()){
         // console.log(file);
-        contents[files[i]] = fs.readFileSync(filePath);
+        filename = filePath.substr(6);
+        contents[filename] = fs.readFileSync(filePath);
       }
     }
   }
-  // console.log(contents);
-
-  return contents;
 }
