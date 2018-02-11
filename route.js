@@ -2,7 +2,7 @@ const yaml  = require('js-yaml');
 
 var route;
 try{
-  route = yaml.safeLoad(fs.readFileSync('./route.yml', 'utf8'));
+  route = yaml.safeLoad(fs.readFileSync('./config/route.yml', 'utf8'));
 }catch(e){
   console.log(e);
 }
