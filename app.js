@@ -5,6 +5,7 @@ const http  = require('http'),
 
 ejs   = require('ejs');
 fs    = require('fs');
+sass  = require('node-sass');
 
 // mysqlの接続設定
 mysqlConnection = mysql.createConnection({
@@ -13,6 +14,9 @@ mysqlConnection = mysql.createConnection({
 	password: ConfigFile.mysql.pass,
 	database: ConfigFile.mysql.database
 });
+
+// SASSファイルのコンパイル
+require('./sass.js');
 
 var export_function = {};
 export_function.route = require('./route.js');
