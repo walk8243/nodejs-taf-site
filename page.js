@@ -16,23 +16,35 @@ libFiles = loadLibFiles('./lib');
 // console.log(libFiles);
 
 // `route.yml`で指定している関数を実行
-exports.pages = function(page, data){
+exports.pages = function(res, page, data){
   var htmlData = "";
   // console.log(page);
 
   // 定義されているかどうかの確認
   var selectPageFunc = selectPage(page);
   if(selectPageFunc === false){
-    return htmlData;
+    // Error発生
+    // 本来ここは500ページ
+    res.writeHead(500, {'Content-Type': 'text/plain'});
+    res.end('Internal Server Error');
+    return;
   }
-  htmlData = selectPageFunc(page, data);
 
-  return htmlData;
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  selectPageFunc(page, data, res);
 }
 
-//
+// libフォルダを格納
 exports.lib = function(filename){
   return libFiles[filename];
+}
+
+// テスト
+exports.res = function(res){
+  // return true;
+
+  res.write('aaa');
+  res.end();
 }
 
 // 使用するテンプレートオブジェクトを探索する
@@ -72,7 +84,7 @@ selectPage = function(page){
 }
 
 // ページをレンダリングする
-renderPage = function(template, postData){
+renderPage = function(res, template, postData){
   var ejsData = {};
   ejsData.data = data;
   for(var key in postData){
@@ -81,7 +93,10 @@ renderPage = function(template, postData){
     }
   }
 
-  return ejs.render(template, ejsData);
+  // return ejs.render(template, ejsData);
+  htmlData = ejs.render(template, ejsData);
+  res.write(htmlData);
+  res.end();
 }
 
 // `template`フォルダに存在する全ての`ejs`ファイルを読み込む

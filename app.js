@@ -39,9 +39,8 @@ function doRequest(request, response){
   var url_title, url_page, url_data;
   if(url_result === false){
     // 本来ここは404ページ
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write('param Error!');
-    response.end();
+    response.writeHead(404, {'Content-Type': 'text/plain'});
+    response.end('param Error!');
     return;
   }else if(typeof url_result === 'object'){
     if(url_result[0] == 'lib'){
@@ -55,13 +54,17 @@ function doRequest(request, response){
     url_data = url_result[1];
     url_title = url_data.title;
 
-    htmlData = export_function.page.pages(url_page, url_data);
+    export_function.page.pages(response, url_page, url_data);
   }else{
     url_page = "";
     url_title = url_result;
     url_data = {};
+
+    response.end();
+    return;
   }
 
-  response.writeHead(200, {'Content-Type': 'text/html'});
-  response.end(htmlData);
+  response.on('close', function(){
+    console.log('response close!');
+  });
 }
