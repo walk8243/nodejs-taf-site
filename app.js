@@ -1,7 +1,7 @@
 const http  = require('http'),
-      url		= require('url'),
-      mysql	= require('mysql'),
-      ConfigFile	= require('config');
+      url   = require('url'),
+      mysql = require('mysql'),
+      ConfigFile  = require('config');
 
 ejs   = require('ejs');
 fs    = require('fs');
@@ -9,10 +9,10 @@ sass  = require('node-sass');
 
 // mysqlの接続設定
 mysqlConnection = mysql.createConnection({
-	host		: ConfigFile.mysql.host,
-	user		: ConfigFile.mysql.user,
-	password: ConfigFile.mysql.pass,
-	database: ConfigFile.mysql.database
+  host    : ConfigFile.mysql.host,
+  user    : ConfigFile.mysql.user,
+  password: ConfigFile.mysql.pass,
+  database: ConfigFile.mysql.database
 });
 
 // SASSファイルのコンパイル

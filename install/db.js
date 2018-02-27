@@ -1,13 +1,13 @@
 const fs    = require('fs'),
       mysql = require('mysql'),
-      ConfigFile	= require('config');
+      ConfigFile  = require('config');
 
 // mysqlの接続設定
 var mysqlConnection = mysql.createConnection({
-	host		: ConfigFile.mysql.host,
-	user		: ConfigFile.mysql.user,
-	password: ConfigFile.mysql.pass,
-	database: ConfigFile.mysql.database,
+  host    : ConfigFile.mysql.host,
+  user    : ConfigFile.mysql.user,
+  password: ConfigFile.mysql.pass,
+  database: ConfigFile.mysql.database,
   multipleStatements: true
 });
 
