@@ -63,8 +63,4 @@ function doRequest(request, response){
     response.end();
     return;
   }
-
-  response.on('close', function(){
-    console.log('response close!');
-  });
 }
