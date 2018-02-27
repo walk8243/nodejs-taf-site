@@ -10,13 +10,9 @@ pagingFuncs = setPagingFunc('./page');
 
 // `lib`フォルダに格納されているファイルの読み込み
 libFiles = {};
-<<<<<<< HEAD
-loadLibFiles('./lib', libFiles);
-=======
 loadExt = ['js', 'css']; // 読み込む拡張子の設定
 regexp = new RegExp('.+\\.(' + loadExt.join('|') + ')$', 'g');
 libFiles = loadLibFiles('./lib');
->>>>>>> 32fbc2f6843314d444c5f40df59f4cce91abb02c
 // console.log(libFiles);
 
 // `route.yml`で指定している関数を実行
@@ -169,14 +165,9 @@ function setCommonTemplate(tmpObj){
   }
 }
 
-<<<<<<< HEAD
-// `lib`フォルダに存在する全てのファイルの読み込み（サブフォルダは読み込まない）
-function loadLibFiles(dirPath, contents){
-=======
 // `lib`フォルダに存在する全てのファイルの読み込み
 function loadLibFiles(dirPath){
   var contents = {};
->>>>>>> 32fbc2f6843314d444c5f40df59f4cce91abb02c
   if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()){
     var files = fs.readdirSync(dirPath);
     for(var i in files){
@@ -184,21 +175,16 @@ function loadLibFiles(dirPath){
       // console.log(filePath);
       file = fs.statSync(filePath);
       if(file.isDirectory()){
-<<<<<<< HEAD
-        loadLibFiles(filePath, contents);
-      }else if(file.isFile()){
-        // console.log(file);
-        filename = filePath.substr(6);
-        contents[filename] = fs.readFileSync(filePath);
-=======
         contents[files[i]] = loadLibFiles(filePath);
       }else if(file.isFile()){
         // console.log(file);
         if(filePath.match(regexp)){
           contents[files[i]] = fs.readFileSync(filePath);
         }
->>>>>>> 32fbc2f6843314d444c5f40df59f4cce91abb02c
       }
     }
   }
+  // console.log(contents);
+
+  return contents;
 }
