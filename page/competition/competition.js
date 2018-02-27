@@ -8,6 +8,7 @@ exports.competition = function(page, data, res){
 
   // console.log(mysqlConnection);
   console.log('comID = ' + data.com_id);
+  console.log(data);
 
   mysqlConnection.query(
     {

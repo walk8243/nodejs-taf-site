@@ -22,6 +22,21 @@ var export_function = {};
 export_function.route = require('./route.js');
 export_function.page = require('./page.js');
 
+// ウェブサイトで使用する定数を記憶
+siteDefine = {};
+mysqlConnection.query(
+  {
+    sql:    'SELECT `index`, `value` FROM `constant`',
+  },
+  function (error, results, fields) {
+    if (error) throw error;
+    // console.log(results);
+    for(var result of results){
+      siteDefine[result['index']] = result['value'];
+    }
+  }
+);
+
 const server = http.createServer();
 server.on('request', doRequest);
 server.listen(1234);
@@ -51,7 +66,9 @@ function doRequest(request, response){
     }
 
     url_page = url_result[0].split('/');
-    url_data = url_result[1];
+    // url_data = url_result[1];
+    // url_data = url_data.concat(siteDefine);
+    url_data = Object.assign(url_result[1], siteDefine);
     url_title = url_data.title;
 
     export_function.page.pages(response, url_page, url_data);

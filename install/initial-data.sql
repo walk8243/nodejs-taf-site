@@ -2,7 +2,6 @@
 INSERT INTO event (`event`, `sex`, `record`, `order`, `relay_flag`, `combined_flag`)
   VALUES
   ('100m', '男子', true, 1, false, false),
-  ('100m', '男子', true, 1, false, false),
   ('100m', '女子', true, 2, false, false),
   ('200m', '男子', true, 3, false, false),
   ('200m', '女子', true, 4, false, false),
@@ -85,5 +84,6 @@ INSERT INTO round (`round`, `order`)
 
 INSERT INTO constant (`index`, `value`, `comment`)
   VALUES
-  ('admin_member', NULL, '管理者（member_id）'),
-  ('admin_mail', NULL, '管理者メールアドレス');
+  ('club_name', '偽津斗大学陸上競技部', '部活名'),
+  ('admin_member', 'NULL', '管理者（member_id）'),
+  ('admin_mail', 'NULL', '管理者メールアドレス');
