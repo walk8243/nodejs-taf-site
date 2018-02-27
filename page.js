@@ -10,27 +10,45 @@ pagingFuncs = setPagingFunc('./page');
 
 // `lib`フォルダに格納されているファイルの読み込み
 libFiles = {};
+<<<<<<< HEAD
 loadLibFiles('./lib', libFiles);
+=======
+loadExt = ['js', 'css']; // 読み込む拡張子の設定
+regexp = new RegExp('.+\\.(' + loadExt.join('|') + ')$', 'g');
+libFiles = loadLibFiles('./lib');
+>>>>>>> 32fbc2f6843314d444c5f40df59f4cce91abb02c
 // console.log(libFiles);
 
 // `route.yml`で指定している関数を実行
-exports.pages = function(page, data){
+exports.pages = function(res, page, data){
   var htmlData = "";
   // console.log(page);
 
   // 定義されているかどうかの確認
   var selectPageFunc = selectPage(page);
   if(selectPageFunc === false){
-    return htmlData;
+    // Error発生
+    // 本来ここは500ページ
+    res.writeHead(500, {'Content-Type': 'text/plain'});
+    res.end('Internal Server Error');
+    return;
   }
-  htmlData = selectPageFunc(page, data);
 
-  return htmlData;
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  selectPageFunc(page, data, res);
 }
 
-//
+// libフォルダを格納
 exports.lib = function(filename){
   return libFiles[filename];
+}
+
+// テスト
+exports.res = function(res){
+  // return true;
+
+  res.write('aaa');
+  res.end();
 }
 
 // 使用するテンプレートオブジェクトを探索する
@@ -70,7 +88,7 @@ selectPage = function(page){
 }
 
 // ページをレンダリングする
-renderPage = function(template, postData){
+renderPage = function(res, template, postData){
   var ejsData = {};
   ejsData.data = data;
   for(var key in postData){
@@ -79,7 +97,10 @@ renderPage = function(template, postData){
     }
   }
 
-  return ejs.render(template, ejsData);
+  // return ejs.render(template, ejsData);
+  htmlData = ejs.render(template, ejsData);
+  res.write(htmlData);
+  res.end();
 }
 
 // `template`フォルダに存在する全ての`ejs`ファイルを読み込む
@@ -148,8 +169,14 @@ function setCommonTemplate(tmpObj){
   }
 }
 
+<<<<<<< HEAD
 // `lib`フォルダに存在する全てのファイルの読み込み（サブフォルダは読み込まない）
 function loadLibFiles(dirPath, contents){
+=======
+// `lib`フォルダに存在する全てのファイルの読み込み
+function loadLibFiles(dirPath){
+  var contents = {};
+>>>>>>> 32fbc2f6843314d444c5f40df59f4cce91abb02c
   if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()){
     var files = fs.readdirSync(dirPath);
     for(var i in files){
@@ -157,11 +184,20 @@ function loadLibFiles(dirPath, contents){
       // console.log(filePath);
       file = fs.statSync(filePath);
       if(file.isDirectory()){
+<<<<<<< HEAD
         loadLibFiles(filePath, contents);
       }else if(file.isFile()){
         // console.log(file);
         filename = filePath.substr(6);
         contents[filename] = fs.readFileSync(filePath);
+=======
+        contents[files[i]] = loadLibFiles(filePath);
+      }else if(file.isFile()){
+        // console.log(file);
+        if(filePath.match(regexp)){
+          contents[files[i]] = fs.readFileSync(filePath);
+        }
+>>>>>>> 32fbc2f6843314d444c5f40df59f4cce91abb02c
       }
     }
   }

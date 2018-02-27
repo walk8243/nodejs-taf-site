@@ -1,12 +1,12 @@
 var template;
 
-exports.index = function(page, data){
+exports.index = function(page, data, res){
   // console.log(data);
   if(!template){
     template = selectTemplate(page);
   }
 
-  return renderPage(template, {
+  renderPage(res, template, {
     title: data.title
   });
 }
