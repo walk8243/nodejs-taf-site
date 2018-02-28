@@ -6,3 +6,6 @@
 
 # config/product.ymlを無視する
 /config/product.yml
+
+# libフォルダ内のcssファイルを無視する
+/lib/**/*.css

@@ -26,10 +26,10 @@ export_function.page = require('./page.js');
 siteDefine = {};
 mysqlConnection.query(
   {
-    sql:    'SELECT `index`, `value` FROM `constant`',
+    sql: 'SELECT `index`, `value` FROM `constant`',
   },
   function (error, results, fields) {
-    if (error) throw error;
+    if(error){throw error;}
     // console.log(results);
     for(var result of results){
       siteDefine[result['index']] = result['value'];
