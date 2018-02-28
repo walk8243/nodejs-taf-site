@@ -15,10 +15,9 @@ mysqlConnection = mysql.createConnection({
   database: ConfigFile.mysql.database
 });
 
+// 引数を変数に格納
 argList = process.argv.slice(2);
-// for(var arg of argList){
-//   console.log(arg);
-// }
+console.log(argList);
 
 if(argList.indexOf('NC') == -1){
   // SASSファイルのコンパイル
@@ -44,11 +43,13 @@ mysqlConnection.query(
   }
 );
 
+// HTTPサーバを起動
 const server = http.createServer();
 server.on('request', doRequest);
 server.listen(1234);
 console.log('Server running!');
 
+// HTTPリクエストに対する動作
 function doRequest(request, response){
   var url_parts = url.parse(request.url), htmlData = "";
 
@@ -91,7 +92,8 @@ function doRequest(request, response){
     url_title = url_result;
     url_data = {};
 
-    response.end();
+    response.writeHead(500, {'Content-Type': 'text/plain'});
+    response.end('param Error!');
     return;
   }
 }
