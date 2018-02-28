@@ -10,7 +10,7 @@ pagingFuncs = setPagingFunc('./page');
 
 // `lib`フォルダに格納されているファイルの読み込み
 libFiles = {};
-loadExt = ['js', 'css']; // 読み込む拡張子の設定
+loadExt = ['css', 'js', 'jpg', 'jpeg', 'png', 'gif', 'pdf']; // 読み込む拡張子の設定
 regexp = new RegExp('.+\\.(' + loadExt.join('|') + ')$', 'g');
 libFiles = loadLibFiles('./lib');
 // console.log(libFiles);
@@ -45,10 +45,18 @@ exports.lib = function(filename){
   }
   // console.log(libFile);
   if(libFile){
-    if(filename.match(/\.css$/)){
+    if(filename.match(/\.css$/i)){
       returnData[0] = 'text/css';
-    }else if(filename.match(/\.js$/)){
+    }else if(filename.match(/\.js$/i)){
       returnData[0] = 'text/javascript';
+    }else if(filename.match(/\.(jpg|jpeg)$/i)){
+      returnData[0] = 'image/jpeg';
+    }else if(filename.match(/\.(png)$/i)){
+      returnData[0] = 'image/png';
+    }else if(filename.match(/\.(gif)$/i)){
+      returnData[0] = 'image/gif';
+    }else if(filename.match(/\.(pdf)$/i)){
+      returnData[0] = 'application/pdf';
     }else{
       returnData[0] = 'text/html';
     }
