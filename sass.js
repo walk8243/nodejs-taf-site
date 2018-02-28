@@ -1,3 +1,5 @@
+console.log('sass compile!');
+
 sassList = [];
 searchSass('./lib');
 // console.log(sassList);

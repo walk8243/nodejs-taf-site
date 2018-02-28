@@ -15,8 +15,15 @@ mysqlConnection = mysql.createConnection({
   database: ConfigFile.mysql.database
 });
 
-// SASSファイルのコンパイル
-require('./sass.js');
+argList = process.argv.slice(2);
+// for(var arg of argList){
+//   console.log(arg);
+// }
+
+if(argList.indexOf('NC') == -1){
+  // SASSファイルのコンパイル
+  require('./sass.js');
+}
 
 var export_function = {};
 export_function.route = require('./route.js');
