@@ -59,9 +59,16 @@ function doRequest(request, response){
     return;
   }else if(typeof url_result === 'object'){
     if(url_result[0] == 'lib'){
-      response.writeHead(200, {'Content-Type': 'text/plain'});
-      response.write(export_function.page.lib(url_result[1]));
-      response.end();
+      // console.log(url_result);
+      var result = export_function.page.lib(url_result[1]);
+      if(result){
+        response.writeHead(200, {'Content-Type': result[0]});
+        response.write(result[1]);
+        response.end();
+      }else{
+        response.writeHead(404, {'Content-Type': 'text/plain'});
+        response.end('param Error!');
+      }
       return;
     }
 

@@ -36,7 +36,26 @@ exports.pages = function(res, page, data){
 
 // libフォルダを格納
 exports.lib = function(filename){
-  return libFiles[filename];
+  // console.log(libFiles[filename]);
+  var libFile = libFiles,
+      returnData = [],
+      pieces = filename.split('/');
+  for(var piece of pieces){
+    libFile = libFile[piece];
+  }
+  // console.log(libFile);
+  if(libFile){
+    if(filename.match(/\.css$/)){
+      returnData[0] = 'text/css';
+    }else if(filename.match(/\.js$/)){
+      returnData[0] = 'text/javascript';
+    }else{
+      returnData[0] = 'text/html';
+    }
+
+    returnData[1] = libFile;
+  }
+  return returnData;
 }
 
 // テスト

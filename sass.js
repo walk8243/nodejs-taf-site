@@ -1,6 +1,6 @@
 sassList = [];
 searchSass('./lib');
-console.log(sassList);
+// console.log(sassList);
 for(var sassPath of sassList){
   var result = sass.renderSync({
     file: sassPath.sass,
