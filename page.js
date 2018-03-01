@@ -18,6 +18,7 @@ pagingFuncs = setPagingFunc('./page');
 adminPagingFuncs = setPagingFunc('./admin/page');
 // console.log(adminPagingFuncs);
 
+
 // `lib`フォルダに格納されているファイルの読み込み
 libFiles = {};
 loadExt = ['css', 'js', 'jpg', 'jpeg', 'png', 'gif', 'pdf']; // 読み込む拡張子の設定
@@ -28,10 +29,10 @@ libFiles = loadLibFiles('./lib');
 // `route.yml`で指定している関数を実行
 exports.pages = function(res, page, data){
   var htmlData = "";
-  // console.log(page);
+  // console.log(data);
 
   // 定義されているかどうかの確認
-  var selectPageFunc = selectPage(page);
+  var selectPageFunc = selectPage(page.slice());
   if(selectPageFunc === false){
     // Error発生
     // 本来ここは500ページ
@@ -78,11 +79,16 @@ exports.lib = function(filename){
 
 // 使用するテンプレートオブジェクトを探索する
 selectTemplate = function(page){
-  var tmpObj = templateFiles;
-  for(var i in page){
-    if(page.hasOwnProperty(i)){
-      tmpObj = tmpObj[page[i]];
-    }
+  // console.log(page);
+  var tmpObj, mode=page.shift();
+  if(mode == 'main'){
+    tmpObj = templateFiles;
+  }else if(mode == 'admin'){
+    tmpObj = adminTemplateFiles;
+  }
+
+  for(var val of page){
+    tmpObj = tmpObj[val];
   }
 
   if(typeof tmpObj === 'object'){
@@ -96,11 +102,15 @@ selectTemplate = function(page){
 
 // 使用するページ表示関数を探索する
 selectPage = function(page){
-  var tmpFunc = pagingFuncs;
-  for(var i in page){
-    if(page.hasOwnProperty(i)){
-      tmpFunc = tmpFunc[page[i]];
-    }
+  var tmpFunc, mode=page.shift();
+  if(mode == 'main'){
+    tmpFunc = pagingFuncs;
+  }else if(mode == 'admin'){
+    tmpFunc = adminPagingFuncs;
+  }
+
+  for(var val of page){
+    tmpFunc = tmpFunc[val];
   }
 
   if(typeof tmpFunc === 'function'){

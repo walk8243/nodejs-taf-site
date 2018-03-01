@@ -6,15 +6,28 @@ try{
 }catch(e){
   console.log(e);
 }
+var adminRoute;
+try{
+  adminRoute = yaml.safeLoad(fs.readFileSync('./config/admin.yml', 'utf8'));
+}catch(e){
+  console.log(e);
+}
 
-exports.routes = function(pathname){
+exports.routes = function(pathname, mode){
   // console.log(pathname);
+  var routeObj;
+  if(mode == 'main'){
+    routeObj = route;
+  }else if(mode == 'admin'){
+    routeObj = adminRoute;
+  }
+
   if(pathname == "/"){
     var returnData = [];
     returnData[0] = 'index';
     data = {};
-    data['title'] = route[""].title;
-    data['page'] = route[""].page;
+    data['title'] = routeObj[""].title;
+    data['page'] = routeObj[""].page;
     returnData[1] = data;
     return returnData;
   }else if(pathname.match(/\/lib\//)){
@@ -28,7 +41,7 @@ exports.routes = function(pathname){
   var pathArray = pathname.split('/');
   pathArray.shift();
   // console.log(pathArray);
-  var returnData = [], thisRoute = route;
+  var returnData = [], thisRoute = routeObj;
   for(var i in pathArray){
     // URLの最後が`/`で終わっていた場合の例外処理
     if(pathArray[i] == ''){

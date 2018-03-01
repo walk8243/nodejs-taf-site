@@ -60,6 +60,15 @@ console.log('Server running!');
 
 // HTTPリクエストに対する動作
 function doRequest(request, response){
+  requestFunc(request, response, 'main');
+}
+
+// AdminページのHTTPリクエストに対する動作
+function doAdminRequest(request, response){
+  requestFunc(request, response, 'admin');
+}
+
+function requestFunc(request, response, mode){
   var url_parts = url.parse(request.url), htmlData = "";
 
   if(url_parts.pathname == '/favicon.ico'){
@@ -67,7 +76,7 @@ function doRequest(request, response){
   }
   // console.log(url_parts);
 
-  var url_result = export_function.route.routes(url_parts.pathname);
+  var url_result = export_function.route.routes(url_parts.pathname, mode);
   var url_title, url_page, url_data;
   if(url_result === false){
     // 本来ここは404ページ
@@ -90,9 +99,8 @@ function doRequest(request, response){
     }
 
     url_page = url_result[0].split('/');
+    url_page.unshift(mode);
     // console.log(url_page);
-    // url_data = url_result[1];
-    // url_data = url_data.concat(siteDefine);
     url_data = Object.assign(url_result[1], siteDefine);
     url_title = url_data.title;
 
@@ -106,10 +114,4 @@ function doRequest(request, response){
     response.end('param Error!');
     return;
   }
-}
-
-// AdminページのHTTPリクエストに対する動作
-function doAdminRequest(request, response){
-  response.writeHead(200, {'Content-Type': 'text/plain'});
-  response.end();
 }
