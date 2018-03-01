@@ -1,12 +1,22 @@
 // テンプレートファイルの読み込み
 templateFiles = {};
 loadTemplate('./template', templateFiles);
-setCommonTemplate(templateFiles);
+setCommonTemplate(templateFiles, templateFiles);
 // console.log(templateFiles);
+
+// テンプレートファイルの読み込み(Admin)
+adminTemplateFiles = {};
+loadTemplate('./admin/template', adminTemplateFiles);
+setCommonTemplate(adminTemplateFiles, adminTemplateFiles);
+// console.log(adminTemplateFiles);
 
 // ページングで使用する関数を入れるオブジェクト
 pagingFuncs = setPagingFunc('./page');
 // console.log(pagingFuncs);
+
+// ページングで使用する関数を入れるオブジェクト(Admin)
+adminPagingFuncs = setPagingFunc('./admin/page');
+// console.log(adminPagingFuncs);
 
 // `lib`フォルダに格納されているファイルの読み込み
 libFiles = {};
@@ -64,14 +74,6 @@ exports.lib = function(filename){
     returnData[1] = libFile;
   }
   return returnData;
-}
-
-// テスト
-exports.res = function(res){
-  // return true;
-
-  res.write('aaa');
-  res.end();
 }
 
 // 使用するテンプレートオブジェクトを探索する
@@ -175,12 +177,12 @@ function setPagingFunc(dirPath){
   return pagingFuncs;
 }
 
-function setCommonTemplate(tmpObj){
-  var commonTemplate = templateFiles.common;
+function setCommonTemplate(tmpObj, oriObj){
+  var commonTemplate = oriObj.common;
   for(var key in tmpObj){
     if(tmpObj.hasOwnProperty(key) && key!="common"){
       if(typeof tmpObj[key] == 'object'){
-        setCommonTemplate(tmpObj[key]);
+        setCommonTemplate(tmpObj[key], oriObj);
       }else if(typeof tmpObj[key] == 'string'){
         for(var mass in commonTemplate){
           if(commonTemplate.hasOwnProperty(mass)){

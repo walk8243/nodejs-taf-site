@@ -1,7 +1,13 @@
 const http  = require('http'),
       url   = require('url'),
       mysql = require('mysql'),
-      ConfigFile  = require('config');
+      ConfigFile  = require('config'),
+      auth  = require('http-auth');
+
+var basic = auth.basic({
+  realm : 'aaa',
+  file  : './.htpasswd'
+});
 
 ejs   = require('ejs');
 fs    = require('fs');
@@ -17,7 +23,7 @@ mysqlConnection = mysql.createConnection({
 
 // 引数を変数に格納
 argList = process.argv.slice(2);
-console.log(argList);
+// console.log(argList);
 
 if(argList.indexOf('NC') == -1){
   // SASSファイルのコンパイル
@@ -44,9 +50,12 @@ mysqlConnection.query(
 );
 
 // HTTPサーバを起動
-const server = http.createServer();
-server.on('request', doRequest);
+const server = http.createServer(doRequest);
 server.listen(1234);
+
+const adminServer = http.createServer(basic, doAdminRequest);
+adminServer.listen(8080);
+
 console.log('Server running!');
 
 // HTTPリクエストに対する動作
@@ -81,6 +90,7 @@ function doRequest(request, response){
     }
 
     url_page = url_result[0].split('/');
+    // console.log(url_page);
     // url_data = url_result[1];
     // url_data = url_data.concat(siteDefine);
     url_data = Object.assign(url_result[1], siteDefine);
@@ -96,4 +106,10 @@ function doRequest(request, response){
     response.end('param Error!');
     return;
   }
+}
+
+// AdminページのHTTPリクエストに対する動作
+function doAdminRequest(request, response){
+  response.writeHead(200, {'Content-Type': 'text/plain'});
+  response.end();
 }

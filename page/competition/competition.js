@@ -7,8 +7,8 @@ exports.competition = function(page, data, res){
   }
 
   // console.log(mysqlConnection);
-  console.log('comID = ' + data.com_id);
-  console.log(data);
+  // console.log('comID = ' + data.com_id);
+  // console.log(data);
 
   mysqlConnection.query(
     {
@@ -17,7 +17,7 @@ exports.competition = function(page, data, res){
     },
     function (error, results, fields) {
       if (error) throw error;
-      console.log(results);
+      // console.log(results);
       // console.log(fields);
       eventName = results[0]['sex'] + results[0]['event'];
 

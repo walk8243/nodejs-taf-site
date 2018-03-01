@@ -30,6 +30,7 @@ exports.routes = function(pathname){
   // console.log(pathArray);
   var returnData = [], thisRoute = route;
   for(var i in pathArray){
+    // URLの最後が`/`で終わっていた場合の例外処理
     if(pathArray[i] == ''){
       if(returnData[0]){
         return returnData;
@@ -37,6 +38,8 @@ exports.routes = function(pathname){
         return false;
       }
     }
+
+    // URLから設定されたデータの取得
     var result = decisionPath(pathArray[i], thisRoute, returnData);
     if(result === true){ // 設定されているURLに完結したとき
       return returnData;
