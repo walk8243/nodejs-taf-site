@@ -20,7 +20,7 @@ exports.routes = function(pathname, mode){
     case 'main':
       routeObj = route;
       break;
-    case 'main':
+    case 'admin':
       routeObj = adminRoute;
       break;
     default:

@@ -54,7 +54,8 @@ const server = http.createServer(doRequest);
 server.listen(1234);
 
 const adminServer = http.createServer(basic, doAdminRequest);
-adminServer.listen(8080);
+// const adminServer = http.createServer(doAdminRequest);
+adminServer.listen(5678);
 
 console.log('Server running!');
 
@@ -70,6 +71,8 @@ function doAdminRequest(request, response){
 
 function requestFunc(request, response, mode){
   var url_parts = url.parse(request.url), htmlData = "";
+  var hostname = request.headers.host.split(':')[0];
+  // console.log(hostname);
 
   if(url_parts.pathname == '/favicon.ico'){
     return;
@@ -79,6 +82,7 @@ function requestFunc(request, response, mode){
   var url_result = export_function.route.routes(url_parts.pathname, mode);
   var url_title, url_page, url_data;
   if(url_result === false){
+    console.log(url_parts);
     // 本来ここは404ページ
     response.writeHead(404, {'Content-Type': 'text/plain'});
     response.end('param Error!');
