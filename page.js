@@ -81,10 +81,15 @@ exports.lib = function(filename){
 selectTemplate = function(page){
   // console.log(page);
   var tmpObj, mode=page.shift();
-  if(mode == 'main'){
-    tmpObj = templateFiles;
-  }else if(mode == 'admin'){
-    tmpObj = adminTemplateFiles;
+  switch (mode) {
+    case 'main':
+      tmpObj = templateFiles;
+      break;
+    case 'admin':
+      tmpObj = adminTemplateFiles;
+      break;
+    default:
+      return false;
   }
 
   for(var val of page){
@@ -103,10 +108,15 @@ selectTemplate = function(page){
 // 使用するページ表示関数を探索する
 selectPage = function(page){
   var tmpFunc, mode=page.shift();
-  if(mode == 'main'){
-    tmpFunc = pagingFuncs;
-  }else if(mode == 'admin'){
-    tmpFunc = adminPagingFuncs;
+  switch (mode) {
+    case 'main':
+      tmpFunc = pagingFuncs;
+      break;
+    case 'admin':
+      tmpFunc = adminPagingFuncs;
+      break;
+    default:
+      return false;
   }
 
   for(var val of page){

@@ -16,10 +16,15 @@ try{
 exports.routes = function(pathname, mode){
   // console.log(pathname);
   var routeObj;
-  if(mode == 'main'){
-    routeObj = route;
-  }else if(mode == 'admin'){
-    routeObj = adminRoute;
+  switch (mode) {
+    case 'main':
+      routeObj = route;
+      break;
+    case 'main':
+      routeObj = adminRoute;
+      break;
+    default:
+      return false;
   }
 
   if(pathname == "/"){
