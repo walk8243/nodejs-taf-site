@@ -1,23 +1,19 @@
 var express = require('express'),
     auth    = require('http-auth'),
     vhost   = require('vhost'),
+    mysql   = require('mysql'),
     yaml    = require('js-yaml'),
     config  = require('config');
 
+ejs     = require('ejs'),
 fs      = require('fs'),
 myFunc  = require('./func.js'),
 error   = require('./error.js');
-// console.log(config);
 
-var digest = auth.digest({
-  realm : "admin",
-  file  : "./.htpasswd"
-});
 
 const setting   = config.setting,
       hostname  = setting.hostname;
 var app = express();
-
 var route = {},
     page  = {},
     rest,
@@ -33,6 +29,7 @@ for(var server of setting.server){
     }else{
       // console.log(subdomain+'.'+hostname);
       app.use(vhost(subdomain+'.'+hostname, eval(`${serverName}`)));
+
     }
   }
   page[serverName] = {};
