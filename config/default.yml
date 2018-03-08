@@ -1,0 +1,29 @@
+account:
+  name: account name
+  mail: account mail
+mysql:
+  host: hostname
+  user: username
+  pass: password
+  database: database
+setting:
+  hostname: localhost
+  server:
+    - name: main
+      title: メイン
+      subdomain:
+        - ~
+        - www
+        - main
+      route: route.yml
+    - name: admin
+      title: 管理
+      subdomain:
+        - admin
+      route: admin.yml
+      auth: true
+    - name: create
+      title: create
+      subdomain:
+        - create
+      route: create.yml

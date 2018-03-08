@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "app": "NODE_ENV=product node app.js",
+    "create": "node createServer.js",
     "db": "NODE_ENV=product node install/db.js",
     "dev": "NODE_ENV=development node app.js",
     "test": "NODE_ENV=test node app.js"
@@ -19,6 +20,17 @@
     "url": "https://github.com/walk8243/nodejs-taf-site/issues"
   },
   "homepage": "https://github.com/walk8243/nodejs-taf-site#readme",
-  "dependencies": {},
+  "dependencies": {
+    "config": "^1.30.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "fs": "0.0.1-security",
+    "htdigest": "^2.2.3",
+    "http-auth": "^3.2.3",
+    "js-yaml": "^3.11.0",
+    "mysql": "^2.15.0",
+    "node-sass": "^4.7.2",
+    "vhost": "^3.0.2"
+  },
   "devDependencies": {}
 }
