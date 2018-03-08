@@ -1,9 +1,0 @@
-account:
-  name: "account name"
-  mail: "account mail"
-
-mysql:
-  host: "hostname"
-  user: "username"
-  pass: "password"
-  database: "database"

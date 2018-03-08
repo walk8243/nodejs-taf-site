@@ -1,8 +1,0 @@
-"":
-  title: "admin"
-  page: "admin"
-  auth: true
-  children:
-    "login":
-      title: "login"
-      page: "admin/login"
