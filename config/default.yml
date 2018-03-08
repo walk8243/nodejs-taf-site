@@ -22,8 +22,3 @@ setting:
         - admin
       route: admin.yml
       auth: true
-    - name: create
-      title: create
-      subdomain:
-        - create
-      route: create.yml
