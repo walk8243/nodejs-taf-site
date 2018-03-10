@@ -10,14 +10,14 @@ setting:
   hostname: localhost
   server:
     - name: main
-      title: メイン
+      title: 偽津斗大学陸上競技部
       subdomain:
         - ~
         - www
         - main
       route: route.yml
     - name: admin
-      title: 管理
+      title: 偽津斗大学陸上競技部
       subdomain:
         - admin
       route: admin.yml
