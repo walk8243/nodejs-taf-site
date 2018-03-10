@@ -29,6 +29,11 @@ Server'${contents[0]}' can't start!
 Please check the configuration file!
       `;
       break;
+    case 101:
+      message = `
+Server can't start!
+Please check error message!
+      `;
     default:
   }
 

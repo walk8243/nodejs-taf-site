@@ -36,6 +36,44 @@ function readPage(server, page, data){
   }
 }
 
+function readDir(dirpath, fsArray){
+  if(isExistFile(dirpath)){
+    files = fs.readdirSync(dirpath);
+    // console.log(files);
+    for(var file of files){
+      var filepath  = dirpath + '/' + file,
+          fileStats = fs.statSync(filepath);
+      // console.log(filepath);
+      if(fileStats.isDirectory()){
+        // console.log('dir');
+        readDir(filepath, fsArray);
+      }else if(fileStats.isFile()){
+        // console.log('file');
+        fsArray.push(filepath);
+      }
+    }
+  }else{
+    console.log(error.printErrorMessage(0, [dirpath]));
+  }
+}
+
+function readLibDir(libPath, fsArray){
+  if(isExistFile(libPath)){
+    readDir(libPath, fsArray);
+    // console.log(fsArray);
+
+    var startPos = libPath.length;
+    Object.keys(fsArray).forEach(function(key){
+      fsArray[key] = fsArray[key].substring(startPos);
+    });
+    // console.log(fsArray);
+    return true;
+  }else{
+    console.log(error.printErrorMessage(0, [libPath]));
+    return false;
+  }
+}
+
 function isExistFile(filepath){
   try{
     fs.statSync(filepath);
@@ -50,5 +88,7 @@ function isExistFile(filepath){
 module.exports = {
   renderEjs   : renderEjs,
   readPage    : readPage,
+  readDir     : readDir,
+  readLibDir  : readLibDir,
   isExistFile : isExistFile
 };
