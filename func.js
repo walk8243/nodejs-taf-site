@@ -57,16 +57,27 @@ function readDir(dirpath, fsArray){
   }
 }
 
-function readLibDir(libPath, fsArray){
+function readLibDir(libPath, conditions, fsArray){
   if(isExistFile(libPath)){
     readDir(libPath, fsArray);
     // console.log(fsArray);
 
-    var startPos = libPath.length;
+    var startPos  = libPath.length,
+        regexp    = new RegExp('(.*)(?:\\.('+conditions.join('|')+')$)'),
+        removeKey = [];
     Object.keys(fsArray).forEach(function(key){
-      fsArray[key] = fsArray[key].substring(startPos);
+      if(fsArray[key].match(regexp)){
+        fsArray[key] = fsArray[key].substring(startPos);
+      }else{
+        removeKey.push(key);
+      }
     });
-    // console.log(fsArray);
+    if(removeKey.length > 0){
+      for(var key of removeKey){
+        fsArray.splice(key, 1);
+      }
+    }
+    console.log(fsArray);
     return true;
   }else{
     console.log(error.printErrorMessage(0, [libPath]));

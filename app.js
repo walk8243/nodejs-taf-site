@@ -7,6 +7,7 @@ var express = require('express'),
 
 ejs     = require('ejs'),
 fs      = require('fs'),
+sass    = require('node-sass'),
 myFunc  = require('./func.js'),
 error   = require('./error.js');
 
@@ -20,7 +21,8 @@ var route = {},
     rest,
     authFile  = './.htpasswd',
     libFiles  = [],
-    libDir    = './lib';
+    libDir    = './lib',
+    libCond   = ['js', 'css'];
 
 // mysqlの接続設定
 mysqlConnection = mysql.createConnection({
@@ -54,6 +56,7 @@ promise1 = new Promise(function(resolve, reject){
 });
 promise2 = new Promise(function(resolve, reject){
   // SASSのコンパイル
+  require('./sass.js');
   resolve();
 });
 
@@ -145,7 +148,7 @@ Promise.all([promise1, promise2]).then(function(){
 }).then(function(){
   // libフォルダ内の読み込み
   return new Promise(function(resolve, reject){
-    if(myFunc.readLibDir(libDir, libFiles)){
+    if(myFunc.readLibDir(libDir, libCond, libFiles)){
       for(let libFile of libFiles){
         app.route(libFile)
           .get(function(req, res){
@@ -175,6 +178,7 @@ Promise.all([promise1, promise2]).then(function(){
   });
 }).catch(function(){
   console.error(error.printErrorMessage(101, []));
+  process.exit(0);
 });
 
 
