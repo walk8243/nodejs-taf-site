@@ -7,7 +7,6 @@ var express = require('express'),
 
 ejs     = require('ejs'),
 fs      = require('fs'),
-sass    = require('node-sass'),
 myFunc  = require('./func.js'),
 error   = require('./error.js');
 

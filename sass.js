@@ -1,4 +1,10 @@
 console.log('sass compile!');
+var sass  = require('node-sass');
+
+if(typeof fs === 'object'){
+}else{
+  var fs  = require('fs');
+}
 
 sassList = [];
 searchSass('./lib');
