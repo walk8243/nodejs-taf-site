@@ -30,6 +30,7 @@ class Page {
     var tempEjs = fs.readFileSync(this.template).toString();
     this.pageData['baseDir'] = this.baseTempDir;
     // console.log(tempEjs);
+    // console.log(this.pageData);
     this.htmlStr = ejs.render(tempEjs, this.pageData, {delimiter: '?'});
   }
 
