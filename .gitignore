@@ -7,8 +7,14 @@
 # config/product.ymlを無視する
 /config/product.yml
 
+# .htpasswdを無視する
+/.htpasswd
+
 # libフォルダ内のcssファイルを無視する
 /lib/**/*.css
 
 # bkフォルダ内を無視する
 /bk/**/*
+
+# test用ファイルを無視する
+/test.js
