@@ -22,7 +22,7 @@ var route = {},
     authFile  = './.htpasswd',
     libFiles  = [],
     libDir    = './lib',
-    libCond   = ['js', 'css'];
+    libCond   = ['js', 'css', 'jpg', 'jpeg', 'png', 'gif', 'pdf'];
 
 // mysqlの接続設定
 mysqlConnection = mysql.createConnection({

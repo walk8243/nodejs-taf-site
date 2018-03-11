@@ -73,8 +73,8 @@ function readLibDir(libPath, conditions, fsArray){
       }
     });
     if(removeKey.length > 0){
-      for(var key of removeKey){
-        fsArray.splice(key, 1);
+      for(var i=removeKey.length-1; i>=0; i--){
+        fsArray.splice(removeKey[i], 1);
       }
     }
     console.log(fsArray);
