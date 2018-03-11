@@ -12,7 +12,8 @@ error   = require('./error.js');
 
 
 const setting   = config.setting,
-      hostname  = setting.hostname;
+      hostname  = setting.hostname,
+      portNo    = 1234;
 var app = express(),
     libServer = express();
 var route = {},
@@ -164,8 +165,8 @@ Promise.all([promise1, promise2]).then(function(){
   // Serverの公開
   return new Promise(function(resolve, reject){
     try{
-      app.listen(1234, function(){
-        console.log('Server listening on port 1234!');
+      app.listen(portNo, function(){
+        console.log(`Server listening on port ${portNo}!`);
       });
       resolve();
     }catch(err){
@@ -255,6 +256,7 @@ function createSendData(server, path){
       title : route[server.name][path].title,
       path  : path
     },
-    var     : route[server.name][path].var
+    var     : route[server.name][path].var,
+    lib     : `http://lib.${hostname}:${portNo}`
   }
 }
