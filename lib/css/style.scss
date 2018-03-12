@@ -10,13 +10,16 @@ $fontColor__light: $backColor;
 $headerWidth: 350px;
 
 html {
+  height: 100%;
   font-size: 18px;
+  background: $backColor;
 }
 
 body {
   display: grid;
   grid-template-columns: $headerWidth auto;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr auto;
+  min-height: 100%;
   color: $fontColor;
   background: $backColor;
   margin: 0;
@@ -92,6 +95,7 @@ footer {
     padding: 0 100px;
   }
   .copyright {
+    margin-left: -450px;
     font-size: 0.8rem;
     text-align: center;
   }
