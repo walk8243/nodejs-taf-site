@@ -1,7 +1,23 @@
 <?- include(baseDir+'/common/_head') -?>
-    <p>competition</p>
-    <p>
-      baseTempDir:<br />
-      ==> <?= baseDir ?>
-    </p>
+
+<?- include(baseDir+'/common/_header') -?>
+<main class="page__<?= page.id ?>">
+  <div class="container">
+    <h1 class="title"><?= page.title ?></h1>
+
+    <section>
+      <% if(years.length > 0){ %>
+        <ul>
+          <% for(var year of years){ %>
+            <li>
+              <a href="year/<%= year %>"><%= year %>年度</a>
+            </li>
+          <% } %>
+        </ul>
+      <% } %>
+    </section>
+  </div>
+</main>
 <?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/common/_foot') -?>

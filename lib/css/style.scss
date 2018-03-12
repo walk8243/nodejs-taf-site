@@ -25,13 +25,19 @@ body {
   margin: 0;
 }
 
+header, footer {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
 header {
   position: fixed;
   grid-column: 1 / 2;
   grid-row: 1 / -1;
   color: $fontColor__light;
   z-index: 10;
-  // background: $mainColor;
   &::before {
     content: "";
     position: absolute;
@@ -105,6 +111,19 @@ main {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   padding: 0 10px;
+
+  h1 {
+    color: $mainColor;
+  }
+  a {
+    color: $mainColor;
+  }
+
+  .container {
+    width: auto;
+    max-width: 750px;
+    margin: 0 auto;
+  }
   .big-link {
     color: $linkBarColor__light;
     background: $linkBarColor;
@@ -113,9 +132,8 @@ main {
     padding: 0.5rem;
     text-align: center;
   }
-
-  h1 {
-    color: $mainColor;
+  .title {
+    font-size: 3rem;
   }
 }
 
@@ -125,17 +143,6 @@ h1 {
 
 p {
   margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.container {
-  width: auto;
-  max-width: 750px;
-  margin: 0 auto;
 }
 
 .page {
