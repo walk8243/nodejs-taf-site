@@ -18,3 +18,4 @@
 
 # test用ファイルを無視する
 /test.js
+/mysql.js
