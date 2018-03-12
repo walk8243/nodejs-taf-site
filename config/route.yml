@@ -1,40 +1,67 @@
 "":
-  title: "index"
-  page: "index"
+  title: トップページ
+  page: index
 
-"test":
-  title: "test"
-  page: "test"
-  children:
-    "test":
-      title: "test-test"
-      page: "test/test"
 "competition":
-  title: "competition"
-  page: "competition"
+  title: 試合日程／結果
+  page: competition
   children:
     "year":
       children:
         "_num_":
-          title: "com-year"
-          page: "competition/year"
-          var: "year_id"
+          title: 試合日程
+          page: competition/year
+          var: year_id
     "competition":
       children:
         "_num_":
-          title: "com-com"
-          page: "competition/competition"
-          var: "com_id"
-"_num_":
-  title: "num"
-  page: "num"
-  var: "test_id"
+          title: 試合結果
+          page: competition/competition
+          var: com_id
+
+"member":
+  title: 部員一覧
+  page: member
   children:
-    "test":
-      title: "num-test"
-      page: "num/test"
+    "member":
       children:
-        "_string_":
-          title: "num-test-string"
-          page: "num/test/string"
-          var: "string_id"
+        "_num_":
+          title: 部員詳細
+          page: member/member
+          var: member_id
+
+"record":
+  title: 歴代記録
+  page: record
+  children:
+    "_string_":
+      title: 歴代記録
+      page: record/gender
+      var: gender_str
+
+"special":
+  children:
+    "_num_":
+      title: 特設ページ
+      page: special
+      var: special_id
+
+"calendar":
+  title: カレンダー
+  page: calendar
+
+"photo":
+  title: 写真
+  page: photo
+
+"notice":
+  title: 部内掲示板
+  page: notice
+
+"link":
+  title: リンク
+  page: link
+
+"info":
+  title: 連絡先／利用規約
+  page: info
