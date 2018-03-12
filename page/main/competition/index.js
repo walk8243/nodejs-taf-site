@@ -29,7 +29,7 @@ SELECT \`years\` AS 'year', COUNT(*) AS 'count'
       },
       function(error, results, fields){
         if(error){throw error;}
-        console.log(results);
+        // console.log(results);
         var comYear = [];
         for(var result of results){
           if(result.count > 0){
