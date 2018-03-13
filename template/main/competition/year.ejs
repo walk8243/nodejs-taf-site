@@ -1,0 +1,52 @@
+<?- include(baseDir+'/common/_head') -?>
+
+<?- include(baseDir+'/common/_header') -?>
+<main class="page__<?= page.id ?>">
+  <div class="container">
+    <h1 class="title"><?= page.title ?></h1>
+
+    <section>
+      <% if(coms.length > 0){ %>
+        <table>
+          <thead>
+            <tr>
+              <th>月日</th>
+              <th>大会名</th>
+              <th>場所</th>
+              <th>結果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var com of coms){ %>
+              <tr>
+                <td>
+                  <%
+                    let startDate = new Date(com.start);
+                    let endDate = new Date(com.end);
+                    if(endDate != 'Invalid Date'){
+                      let endDate = new Date(com.end);
+                  %>
+                      <%= startDate.getMonth() + 1 %>/<%= startDate.getDate() %>
+                      - <%= endDate.getMonth() + 1 %>/<%= endDate.getDate() %>
+                  <%
+                    }else{
+                  %>
+                      <%= startDate.getMonth() + 1 %>/<%= startDate.getDate() %>
+                  <%
+                    }
+                  %>
+                </td>
+                <td><%= com.competition %></td>
+                <td><%= com.place %></td>
+                <td><%= com.id %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+  </div>
+</main>
+<?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/common/_foot') -?>

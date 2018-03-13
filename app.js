@@ -29,7 +29,8 @@ mysqlConnection = mysql.createConnection({
   host    : config.mysql.host,
   user    : config.mysql.user,
   password: config.mysql.pass,
-  database: config.mysql.database
+  database: config.mysql.database,
+  timezone: 'UTC'
 });
 
 var promise1, promise2;
