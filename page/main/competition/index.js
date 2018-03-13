@@ -19,6 +19,7 @@ SELECT \`years\` AS 'year', COUNT(*) AS 'count'
       WHEN MONTH(\`start\`)<=3 THEN YEAR(\`start\`)-1
       END AS 'years'
       FROM \`competition\`
+      WHERE \`del_flag\` = 0
   ) AS \`com-year\`
   GROUP BY \`years\`
   ORDER BY \`years\` DESC
