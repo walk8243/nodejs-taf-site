@@ -3,7 +3,8 @@ var express = require('express'),
     vhost   = require('vhost'),
     mysql   = require('mysql'),
     yaml    = require('js-yaml'),
-    config  = require('config');
+    config  = require('config'),
+    sass    = require('./sass.js');
 
 ejs     = require('ejs'),
 fs      = require('fs'),
@@ -57,7 +58,7 @@ promise1 = new Promise(function(resolve, reject){
 });
 promise2 = new Promise(function(resolve, reject){
   // SASSのコンパイル
-  require('./sass.js');
+  sass.compile();
   resolve();
 });
 
@@ -272,6 +273,7 @@ function onModuleCommand(command){
       break;
     case 'sass':
       console.log('sass Update!');
+      sass.compile();
       break;
     default: break;
   }
