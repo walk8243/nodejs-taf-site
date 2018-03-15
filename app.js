@@ -186,7 +186,7 @@ Promise.all([promise1, promise2]).then(function(){
   process.stdin.on('data', function(chunk){
     // process.stdout.write(chunk);
     if(chunk != null){
-      onModuleCommand(chunk);
+      onModuleCommand(chunk.slice(0,-1).split(' '));
     }
     process.stdout.write('node> ');
   });
@@ -265,6 +265,16 @@ function moldingRoute(inputArea, obj, basePath){
 
 function onModuleCommand(command){
   console.log(command);
+
+  switch(command[0]){
+    case 'ejs':
+      console.log('ejs Update!');
+      break;
+    case 'sass':
+      console.log('sass Update!');
+      break;
+    default: break;
+  }
 }
 
 function createSendData(server, path){
