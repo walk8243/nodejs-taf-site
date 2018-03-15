@@ -168,8 +168,8 @@ Promise.all([promise1, promise2]).then(function(){
     try{
       app.listen(portNo, function(){
         console.log(`Server listening on port ${portNo}!`);
+        resolve();
       });
-      resolve();
     }catch(err){
       if(err){
         throw err;
