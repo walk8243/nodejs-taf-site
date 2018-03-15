@@ -177,6 +177,23 @@ Promise.all([promise1, promise2]).then(function(){
       }
     }
   });
+}).then(function(){
+  // 標準入力の受付
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdout.write('\nAccept command!\n');
+  process.stdout.write('node> ');
+  process.stdin.on('data', function(chunk){
+    // process.stdout.write(chunk);
+    if(chunk != null){
+      onModuleCommand(chunk);
+    }
+    process.stdout.write('node> ');
+  });
+  process.stdin.on('end', function(){
+    process.stdout.write('end\n');
+    process.exit(0);
+  });
 }).catch(function(){
   console.error(error.printErrorMessage(101, []));
   process.exit(0);
@@ -244,6 +261,10 @@ function moldingRoute(inputArea, obj, basePath){
 
     delete rest[obj[key].var];
   });
+}
+
+function onModuleCommand(command){
+  console.log(command);
 }
 
 function createSendData(server, path){
