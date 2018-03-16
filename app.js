@@ -22,9 +22,11 @@ var servers = {},
     route   = {},
     page    = {},
     rest,
+    pageDir   = './page',
+    tempDir   = './template',
+    libDir    = './lib',
     authFile  = './.htpasswd',
     libFiles  = [],
-    libDir    = './lib',
     libCond   = ['js', 'css', 'jpg', 'jpeg', 'png', 'gif', 'pdf'];
 
 // mysqlの接続設定
@@ -278,11 +280,90 @@ function onModuleCommand(command){
   switch(pieces[0]){
     case 'ejs':
       console.log('ejs Update!');
+      for(var i=1; i<pieces.length; i++){
+        let range = '';
+        if(pieces[i].match(/^-s$/)){
+          // console.log(typeof servers[pieces[i+1]]);
+          if(typeof servers[pieces[i+1]] != "undefined"){
+            if(option['range-priority'] == 'd' | option['range-priority'] == 'f'){
+              continue;
+            }
+            option['range'] = tempDir + '/' + pieces[i+1];
+            option['range-priority'] = 's';
+            i++;
+          }else{
+            console.log(error.printErrorMessage(4, [pieces[i+1]]));
+            return;
+          }
+        }else if(pieces[i].match(/^-d$/)){
+          if(option.hasOwnProperty('range-priority')
+            && option['range-priority'] == 's'){
+            if(option['range'].match(/\/$/)){
+              range = option['range'];
+            }else{
+              range = option['range'] + '/';
+            }
+          }
+          if(myFunc.isExistFile(range+pieces[i+1])){
+            range += pieces[i+1];
+          }else if(myFunc.isExistFile(tempDir+'/'+pieces[i+1])){
+            range = tempDir+'/'+pieces[i+1];
+          }else{
+            console.log(error.printErrorMessage(0, [tempDir+'/'+pieces[i+1]]));
+            return;
+          }
+
+          if(fs.statSync(range).isDirectory()){
+            if(option['range-priority'] == 'f'){
+              continue;
+            }
+            option['range'] = range;
+            option['range-priority'] = 'd';
+            i++;
+          }else{
+            console.log(error.printErrorMessage(5, [range]));
+            return;
+          }
+        }else if(pieces[i].match(/^-f$/)){
+          if(option.hasOwnProperty('range-priority')
+            && (option['range-priority'] == 's' || option['range-priority'] == 'd')){
+            if(option['range'].match(/\/$/)){
+              range = option['range'];
+            }else{
+              range = option['range'] + '/';
+            }
+          }
+          if(myFunc.isExistFile(range+pieces[i+1])){
+            range += pieces[i+1];
+          }else if(myFunc.isExistFile(range+pieces[i+1]+'.ejs')){
+            range += pieces[i+1]+'.ejs';
+          }else if(myFunc.isExistFile(tempDir+'/'+pieces[i+1])){
+            range = tempDir+'/'+pieces[i+1];
+          }else if(myFunc.isExistFile(tempDir+'/'+pieces[i+1]+'.ejs')){
+            range = tempDir+'/'+pieces[i+1]+'.ejs';
+          }else{
+            console.log(error.printErrorMessage(0, [tempDir+'/'+pieces[i+1]]));
+            return;
+          }
+
+          if(fs.statSync(range).isFile()){
+            option['range'] = range;
+            option['range-priority'] = 'f';
+            i++;
+          }else{
+            console.log(error.printErrorMessage(6, [range]));
+            return;
+          }
+        }
+      }
+      console.log(option['range'] + ', ' + option['range-priority']);
+
+      // EJSのテンプレートの再作成
       break;
     case 'sass':
       console.log('sass Update!');
       for(var i=1; i<pieces.length; i++){
-        let range;
+        let range = '';
         if(pieces[i].match(/^-d$/)){
           if(myFunc.isExistFile(pieces[i+1])){
             range = pieces[i+1];
