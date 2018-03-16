@@ -1,4 +1,4 @@
-function printErrorMessage(mode, contents){
+function printErrorMessage(mode, contents=[]){
   var message;
   switch (mode) {
     case 0:
@@ -23,6 +23,16 @@ Route file'${contents[0]}' is Already exist!
 Please change the name of '${contents[0]}' or enter a different name!
       `;
       break;
+    case 4:
+      message = `
+Server'${contents[0]}' doesn't exist!
+      `;
+      break;
+    case 5:
+      message = `
+'${contents[0]}' isn't Directory!
+      `;
+      break;
     case 100:
       message = `
 Server'${contents[0]}' can't start!
@@ -34,7 +44,14 @@ Please check the configuration file!
 Server can't start!
 Please check error message!
       `;
-    default:
+      break;
+    case 200:
+      message = `
+Command Error!
+Please execute command'man' and check the command syntax!
+      `;
+      break;
+    default: break;
   }
 
   return message.replace(/^\n/, '');

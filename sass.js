@@ -6,7 +6,7 @@ class Sass {
   }
 
   compile(path = './lib'){
-    console.log('sass compile!');
+    console.log(`sass(${path}) compile!`);
     this.sassList = []; // sassファイルリストの初期化
 
     this.searchSass(path);
@@ -43,7 +43,8 @@ class Sass {
         }
       }
     }else{
-      console.log(0, [path]);
+      console.log(error.printErrorMessage(0, [path]));
+      return;
     }
   }
 

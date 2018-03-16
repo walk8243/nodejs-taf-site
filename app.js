@@ -18,8 +18,9 @@ const setting   = config.setting,
       portNo    = 1234;
 var app = express(),
     libServer = express();
-var route = {},
-    page  = {},
+var servers = {},
+    route   = {},
+    page    = {},
     rest,
     authFile  = './.htpasswd',
     libFiles  = [],
@@ -78,14 +79,14 @@ Promise.all([promise1, promise2]).then(function(){
     for(var server of setting.server){
       // console.log(server);
       let serverName = server.name;
-      eval(`var ${serverName} = express();`);
+      servers[serverName] = express();
       for(var subdomain of server.subdomain){
         if(subdomain == null){
           // console.log(hostname);
-          app.use(vhost(hostname, eval(`${serverName}`)));
+          app.use(vhost(hostname, servers[serverName]));
         }else{
           // console.log(subdomain+'.'+hostname);
-          app.use(vhost(subdomain+'.'+hostname, eval(`${serverName}`)));
+          app.use(vhost(subdomain+'.'+hostname, servers[serverName]));
         }
       }
       page[serverName] = {};
@@ -116,7 +117,7 @@ Promise.all([promise1, promise2]).then(function(){
               if(page[serverName][path] === false){
                 return;
               }
-              eval(`${serverName}`).route(path)
+              servers[serverName].route(path)
                 .get(auth.connect(digest), function(req, res){
                   onRequest(req, res, sendData);
                 });
@@ -129,7 +130,7 @@ Promise.all([promise1, promise2]).then(function(){
               if(page[serverName][path] === false){
                 return;
               }
-              eval(`${serverName}`).route(path)
+              servers[serverName].route(path)
                 .get(function(req, res){
                   onRequest(req, res, sendData);
                 });
@@ -188,7 +189,7 @@ Promise.all([promise1, promise2]).then(function(){
   process.stdin.on('data', function(chunk){
     // process.stdout.write(chunk);
     if(chunk != null){
-      onModuleCommand(chunk.slice(0,-1).split(' '));
+      onModuleCommand(chunk.slice(0,-1));
     }
     process.stdout.write('node> ');
   });
@@ -266,15 +267,88 @@ function moldingRoute(inputArea, obj, basePath){
 }
 
 function onModuleCommand(command){
-  console.log(command);
+  if(!command.match(/^\w+( -[a-zA-Z]+ \S+)*$/)){
+    console.log(error.printErrorMessage(200));
+    return;
+  }
+  var pieces  = command.split(' '),
+      option  = {};
+  console.log(pieces);
 
-  switch(command[0]){
+  switch(pieces[0]){
     case 'ejs':
       console.log('ejs Update!');
       break;
     case 'sass':
       console.log('sass Update!');
-      sass.compile();
+      for(var i=1; i<pieces.length; i++){
+        let range;
+        if(pieces[i].match(/^-s$/)){
+          // console.log(typeof servers[pieces[i+1]]);
+          if(typeof servers[pieces[i+1]] != "undefined"){
+            if(option['range-priority'] == 'd' | option['range-priority'] == 'f'){
+              continue;
+            }
+            option['range'] = pieces[i+1];
+            option['range-priority'] = 's';
+            i++;
+          }else{
+            console.log(error.printErrorMessage(4, [pieces[i+1]]));
+            return;
+          }
+        }else if(pieces[i].match(/^-d$/)){
+          if(myFunc.isExistFile(pieces[i+1])){
+            range = pieces[i+1];
+          }else if(myFunc.isExistFile(libDir+'/'+pieces[i+1])){
+            range = libDir+'/'+pieces[i+1];
+          }else{
+            console.log(error.printErrorMessage(0, [libDir+'/'+pieces[i+1]]));
+            return;
+          }
+
+          if(fs.statSync(range).isDirectory()){
+            if(option['range-priority'] == 'f'){
+              continue;
+            }
+            option['range'] = range;
+            option['range-priority'] = 'd';
+            i++;
+          }else{
+            console.log(error.printErrorMessage(5, [range]));
+            return;
+          }
+        }else if(pieces[i].match(/^-f$/)){
+          if(myFunc.isExistFile(pieces[i+1])){
+            range = pieces[i+1];
+          }else if(myFunc.isExistFile(libDir+'/'+pieces[i+1])){
+            range = libDir+'/'+pieces[i+1];
+          }else{
+            console.log(error.printErrorMessage(0, [libDir+'/'+pieces[i+1]]));
+            return;
+          }
+
+          if(fs.statSync(range).isFile()){
+            option['range'] = range;
+            option['range-priority'] = 'f';
+            i++;
+          }else{
+            console.log(error.printErrorMessage(6, [range]));
+            return;
+          }
+        }
+      }
+      // console.log(option['range'] + ', ' + option['range-priority']);
+      sass.compile(option['range']);
+      break;
+    case 'man':
+      var message = `
+usage: <command> [-s <server name>] [-d <directory path>] [-f <file name>]
+
+These are commands:
+  ejs     Compile EJS file
+  sass    Compile Sass or Scss file
+`;
+      console.log(message.substring(1));
       break;
     default: break;
   }
