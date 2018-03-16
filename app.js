@@ -305,10 +305,26 @@ function onModuleCommand(command){
             return;
           }
         }else if(pieces[i].match(/^-f$/)){
-          if(myFunc.isExistFile(pieces[i+1])){
-            range = pieces[i+1];
+          if(option.hasOwnProperty('range-priority')
+            && option['range-priority'] == 'd'){
+            if(option['range'].match(/\/$/)){
+              range = option['range'];
+            }else{
+              range = option['range'] + '/';
+            }
+          }
+          if(myFunc.isExistFile(range+pieces[i+1])){
+            range = range+pieces[i+1];
+          }else if(myFunc.isExistFile(range+pieces[i+1]+'.scss')){
+            range = range+pieces[i+1]+'.scss';
+          }else if(myFunc.isExistFile(range+pieces[i+1]+'.sass')){
+            range = range+pieces[i+1]+'.sass';
           }else if(myFunc.isExistFile(libDir+'/'+pieces[i+1])){
             range = libDir+'/'+pieces[i+1];
+          }else if(myFunc.isExistFile(libDir+'/'+pieces[i+1]+'.scss')){
+            range = libDir+'/'+pieces[i+1]+'.scss';
+          }else if(myFunc.isExistFile(libDir+'/'+pieces[i+1]+'.sass')){
+            range = libDir+'/'+pieces[i+1]+'.sass';
           }else{
             console.log(error.printErrorMessage(0, [libDir+'/'+pieces[i+1]]));
             return;
