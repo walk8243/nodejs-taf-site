@@ -283,20 +283,7 @@ function onModuleCommand(command){
       console.log('sass Update!');
       for(var i=1; i<pieces.length; i++){
         let range;
-        if(pieces[i].match(/^-s$/)){
-          // console.log(typeof servers[pieces[i+1]]);
-          if(typeof servers[pieces[i+1]] != "undefined"){
-            if(option['range-priority'] == 'd' | option['range-priority'] == 'f'){
-              continue;
-            }
-            option['range'] = pieces[i+1];
-            option['range-priority'] = 's';
-            i++;
-          }else{
-            console.log(error.printErrorMessage(4, [pieces[i+1]]));
-            return;
-          }
-        }else if(pieces[i].match(/^-d$/)){
+        if(pieces[i].match(/^-d$/)){
           if(myFunc.isExistFile(pieces[i+1])){
             range = pieces[i+1];
           }else if(myFunc.isExistFile(libDir+'/'+pieces[i+1])){
