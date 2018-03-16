@@ -1,15 +1,16 @@
-var express = require('express'),
-    auth    = require('http-auth'),
-    vhost   = require('vhost'),
-    mysql   = require('mysql'),
-    yaml    = require('js-yaml'),
-    config  = require('config'),
-    sass    = require('./sass.js');
+const express = require('express'),
+      auth    = require('http-auth'),
+      vhost   = require('vhost'),
+      mysql   = require('mysql'),
+      yaml    = require('js-yaml'),
+      config  = require('config');
 
 ejs     = require('ejs'),
 fs      = require('fs'),
 myFunc  = require('./func.js'),
 error   = require('./error.js');
+
+const sass    = require('./sass.js');
 
 
 const setting   = config.setting,

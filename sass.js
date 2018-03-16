@@ -1,19 +1,15 @@
 var sass  = require('node-sass');
 
-if(typeof fs === 'object'){
-}else{
-  var fs  = require('fs');
-}
-
 class Sass {
   constructor(){
     this.sassList = [];
   }
 
-  compile(){
+  compile(dirPath = './lib'){
     console.log('sass compile!');
+    this.sassList = []; // sassファイルリストの初期化
 
-    this.searchSass('./lib');
+    this.searchSass(dirPath);
     // console.log(this.sassList);
     for(var sassPath of this.sassList){
       var result = sass.renderSync({
@@ -26,7 +22,8 @@ class Sass {
   }
 
   searchSass(dirPath){
-    if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()){
+    if(myFunc.isExistFile(dirPath)
+      && fs.statSync(dirPath).isDirectory()){
       var files = fs.readdirSync(dirPath);
       for(var i in files){
         var filePath = dirPath + "/" + files[i];
@@ -45,6 +42,8 @@ class Sass {
           }
         }
       }
+    }else{
+      console.log(0, [dirPath]);
     }
   }
 }
