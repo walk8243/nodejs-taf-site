@@ -20,7 +20,7 @@ var app = express(),
     libServer = express();
 var servers = {},
     route   = {},
-    page    = {},
+    pages   = {},
     rest,
     pageDir   = './page',
     tempDir   = './template',
@@ -91,7 +91,7 @@ Promise.all([promise1, promise2]).then(function(){
           app.use(vhost(subdomain+'.'+hostname, servers[serverName]));
         }
       }
-      page[serverName] = {};
+      pages[serverName] = {};
 
       // console.log(eval(`${serverName}`));
       try{
@@ -115,8 +115,8 @@ Promise.all([promise1, promise2]).then(function(){
             Object.keys(route[serverName]).forEach(function(path){
               // console.log(`'${path}'=> title:'${route[serverName][path].title}', page:'${route[serverName][path].page}'`);
               let sendData = createSendData(server, path);
-              page[serverName][path] = myFunc.readPage(serverName, route[serverName][path].page, sendData);
-              if(page[serverName][path] === false){
+              pages[serverName][path] = myFunc.readPage(serverName, route[serverName][path].page, sendData);
+              if(pages[serverName][path] === false){
                 return;
               }
               servers[serverName].route(path)
@@ -128,8 +128,8 @@ Promise.all([promise1, promise2]).then(function(){
             Object.keys(route[serverName]).forEach(function(path){
               // console.log(`'${path}'=> title:'${route[serverName][path].title}', page:'${route[serverName][path].page}'`);
               let sendData = createSendData(server, path);
-              page[serverName][path] = myFunc.readPage(serverName, route[serverName][path].page, sendData);
-              if(page[serverName][path] === false){
+              pages[serverName][path] = myFunc.readPage(serverName, route[serverName][path].page, sendData);
+              if(pages[serverName][path] === false){
                 return;
               }
               servers[serverName].route(path)
@@ -220,14 +220,14 @@ function onRequest(req, res, data){
   }
 
   // console.log(page[data.server][data.path]);
-  if(page[data.server.id][data.page.path] === null){
+  if(pages[data.server.id][data.page.path] === null){
     res.status(204).end();
   }else{
     res.status(200);
     if(req.user){
       req.params.user = req.user;
     }
-    page[data.server.id][data.page.path].render(res, req.params);
+    pages[data.server.id][data.page.path].render(res, req.params);
   }
   // res.end(data.title);
 }
@@ -278,87 +278,87 @@ function onModuleCommand(command){
   console.log(pieces);
 
   switch(pieces[0]){
-    case 'ejs':
-      console.log('ejs Update!');
+    case 'page':
+      console.log('page Update!');
+      /*
+        受け付けるオプション
+          -s  サーバの指定
+          -p  パスの指定
+      */
+      option['range'] = {};
+      for(var server in servers){
+        option['range'][server] = [];
+      }
+      option['range-priority'] = null;
+      // console.log(option['range']);
       for(var i=1; i<pieces.length; i++){
-        let range = '';
+        let range = {};
         if(pieces[i].match(/^-s$/)){
           // console.log(typeof servers[pieces[i+1]]);
           if(typeof servers[pieces[i+1]] != "undefined"){
-            if(option['range-priority'] == 'd' | option['range-priority'] == 'f'){
+            if(option['range-priority'] == 'p'){
               continue;
             }
-            option['range'] = tempDir + '/' + pieces[i+1];
-            option['range-priority'] = 's';
+            for(var key in option['range']){
+              if(key != pieces[i+1]){
+                delete option['range'][key];
+              }
+            }
             i++;
           }else{
             console.log(error.printErrorMessage(4, [pieces[i+1]]));
             return;
           }
-        }else if(pieces[i].match(/^-d$/)){
-          if(option.hasOwnProperty('range-priority')
-            && option['range-priority'] == 's'){
-            if(option['range'].match(/\/$/)){
-              range = option['range'];
-            }else{
-              range = option['range'] + '/';
+        }else if(pieces[i].match(/^-p$/)){
+          let regexp = new RegExp('^'+pieces[i+1]);
+          // console.log(regexp);
+          for(var server in pages){
+            // console.log(server);
+            if(option['range'].hasOwnProperty(server)){
+              // console.log(pages[server]);
+              for(var path in pages[server]){
+                if(pages[server].hasOwnProperty(path) && pages[server][path] !== false){
+                  // console.log(path);
+                  if(path.match(regexp)){
+                    option['range'][server].push(path);
+                  }
+                }
+              }
             }
           }
-          if(myFunc.isExistFile(range+pieces[i+1])){
-            range += pieces[i+1];
-          }else if(myFunc.isExistFile(tempDir+'/'+pieces[i+1])){
-            range = tempDir+'/'+pieces[i+1];
-          }else{
-            console.log(error.printErrorMessage(0, [tempDir+'/'+pieces[i+1]]));
-            return;
-          }
-
-          if(fs.statSync(range).isDirectory()){
-            if(option['range-priority'] == 'f'){
-              continue;
+          option['range-priority'] = 'p';
+        }
+      }
+      if(!option['range-priority']){
+        for(var server in pages){
+          // console.log(server);
+          if(option['range'].hasOwnProperty(server)){
+            // console.log(pages[server]);
+            for(var path in pages[server]){
+              if(pages[server].hasOwnProperty(path) && pages[server][path] !== false){
+                // console.log(path);
+                option['range'][server].push(path);
+              }
             }
-            option['range'] = range;
-            option['range-priority'] = 'd';
-            i++;
-          }else{
-            console.log(error.printErrorMessage(5, [range]));
-            return;
-          }
-        }else if(pieces[i].match(/^-f$/)){
-          if(option.hasOwnProperty('range-priority')
-            && (option['range-priority'] == 's' || option['range-priority'] == 'd')){
-            if(option['range'].match(/\/$/)){
-              range = option['range'];
-            }else{
-              range = option['range'] + '/';
-            }
-          }
-          if(myFunc.isExistFile(range+pieces[i+1])){
-            range += pieces[i+1];
-          }else if(myFunc.isExistFile(range+pieces[i+1]+'.ejs')){
-            range += pieces[i+1]+'.ejs';
-          }else if(myFunc.isExistFile(tempDir+'/'+pieces[i+1])){
-            range = tempDir+'/'+pieces[i+1];
-          }else if(myFunc.isExistFile(tempDir+'/'+pieces[i+1]+'.ejs')){
-            range = tempDir+'/'+pieces[i+1]+'.ejs';
-          }else{
-            console.log(error.printErrorMessage(0, [tempDir+'/'+pieces[i+1]]));
-            return;
-          }
-
-          if(fs.statSync(range).isFile()){
-            option['range'] = range;
-            option['range-priority'] = 'f';
-            i++;
-          }else{
-            console.log(error.printErrorMessage(6, [range]));
-            return;
           }
         }
       }
-      console.log(option['range'] + ', ' + option['range-priority']);
+      console.log(option['range']);
 
-      // EJSのテンプレートの再作成
+      // pageクラス内の`htmlStr`を設定し直す
+      for(var server in option['range']){
+        for(var path of option['range'][server]){
+          if(typeof pages[server][path] != "undefined"){
+            // console.log(server + ", " + path + " => OK!");
+            pages[server][path].createTemplate();
+          }else{
+            console.log(server + ", " + path + " => NG!");
+          }
+        }
+      }
+      break;
+    case 'ejs':
+      console.log('ejs Update!');
       break;
     case 'sass':
       console.log('sass Update!');
@@ -426,11 +426,16 @@ function onModuleCommand(command){
       break;
     case 'man':
       var message = `
-usage: <command> [-s <server name>] [-d <directory path>] [-f <file name>]
+usage: <command>
 
 These are commands:
-  ejs     Compile EJS file
+  page    Compile EJS file
   sass    Compile Sass or Scss file
+
+command'page' is usage:
+  page [-s <server name>] [-p <path(Forward match)>]
+
+command'sass' [-d <directory path>] [-f <file name>]
 `;
       console.log(message.substring(1));
       break;
