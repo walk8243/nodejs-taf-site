@@ -3,7 +3,6 @@ const Page = require(process.cwd() + '/page.js');
 class Year extends Page {
   constructor(){
     super();
-    console.log('year');
   }
 
   render(res, data){

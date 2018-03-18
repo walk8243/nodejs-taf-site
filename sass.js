@@ -10,7 +10,7 @@ class Sass {
     this.sassList = []; // sassファイルリストの初期化
 
     this.searchSass(path);
-    console.log(this.sassList);
+    // console.log(this.sassList);
     for(var sassPath of this.sassList){
       var result = sass.renderSync({
         file: sassPath.sass,
