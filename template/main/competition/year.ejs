@@ -7,7 +7,7 @@
 
     <section>
       <% if(coms.length > 0){ %>
-        <table>
+        <table class="com_list">
           <thead>
             <tr>
               <th>月日</th>
@@ -18,12 +18,11 @@
           </thead>
           <tbody>
             <% for(var com of coms){ %>
-              <tr>
-                <td>
+              <tr class="com">
+                <td class="com__date">
                   <%
                     let startDate = new Date(com.start);
-                    let endDate = new Date(com.end);
-                    if(endDate != 'Invalid Date'){
+                    if(com.end != null){
                       let endDate = new Date(com.end);
                   %>
                       <%= startDate.getMonth() + 1 %>/<%= startDate.getDate() %>
@@ -36,9 +35,21 @@
                     }
                   %>
                 </td>
-                <td><%= com.competition %></td>
-                <td><%= com.place %></td>
-                <td><%= com.id %></td>
+                <td class="com__competition"><%= com.competition %></td>
+                <td class="com__place"><%= com.place %></td>
+                <td class="com__link">
+                  <%
+                    if(com.count > 0){
+                  %>
+                  <a href="/competition/competition/<%= com.id %>">結果</a>
+                  <%
+                    }else{
+                  %>
+                  -
+                  <%
+                    }
+                  %>
+                </td>
               </tr>
             <% } %>
           </tbody>

@@ -11,7 +11,7 @@ class Year extends Page {
     pageObj.pageData.param = data;
 
     var sql = `
-SELECT *
+SELECT com.*, result.count
   FROM (
     SELECT
       \`id\`,
@@ -26,8 +26,16 @@ SELECT *
       FROM \`competition\`
       WHERE \`del_flag\`=0
   ) AS com
-    WHERE \`years\` = ${data.year_id}
-    ORDER BY \`start\`, \`id\`
+  LEFT JOIN (
+    SELECT
+      \`competition\`,
+      COUNT(*) AS 'count'
+      FROM \`result\`
+      WHERE \`del_flag\`=0
+      GROUP BY \`competition\`
+  ) AS result ON com.id=result.competition
+  WHERE com.years = ${data.year_id}
+  ORDER BY com.start, com.id
 `;
     mysqlConnection.query(
       {

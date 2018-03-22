@@ -155,4 +155,23 @@ p {
       width: 100%;
     }
   }
+
+  &__competition\/year {
+    .com_list {
+      .com {
+        &__date {
+
+        }
+        &__competition {
+
+        }
+        &__place {
+
+        }
+        &__link {
+          text-align: center;
+        }
+      }
+    }
+  }
 }
