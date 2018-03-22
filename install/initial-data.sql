@@ -96,3 +96,13 @@ INSERT INTO competition (`competition`, `place`, `start`, `end`)
   ('第1回体育大学競技会', 'ヤンマーフィールド長居', '2017-04-02', NULL),
   ('第1回体育大学長距離競技会', 'ヤンマーフィールド長居', '2017-04-02', NULL),
   ('第1回陸連記録会', 'ヤンマーフィールド長居', '2018-03-10', '2018-03-11');
+
+INSERT INTO member (`name1`, `name2`, `phonetic1`, `phonetic2`, `sex`, `grade`, `degree`, `expert`, `graduate`, `position`)
+  VALUES
+  ('陸上', '悠真', 'りくじょう', 'ゆうま', '男子', 1, '学位', '短距離', '東京', NULL),
+  ('陸上', '結菜', 'りくじょう', 'ゆうな', '女子', 1, '学位', '短距離', '東京', NULL);
+
+INSERT INTO result (`result`, `competition`, `event`, `round`, `member`)
+  VALUES
+  ('11\"11(+1.0)', 2, 1, NULL, 1),
+  ('12\"03(+1.0)', 2, 1, NULL, 2);

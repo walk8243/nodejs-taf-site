@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS result (
   `result` VARCHAR(128) NOT NULL COMMENT '結果',
   `competition` INT(11) COMMENT '試合',
   `event` INT(5) COMMENT '種目',
-  `round` INT(2) COMMENT 'ラウンド',
+  `round` INT(2) DEFAULT NULL COMMENT 'ラウンド',
   `member` INT(11) COMMENT '部員',
   `del_flag` BOOLEAN DEFAULT false COMMENT '削除フラッグ',
 
