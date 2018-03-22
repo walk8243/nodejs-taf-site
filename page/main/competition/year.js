@@ -5,13 +5,11 @@ class Year extends Page {
     super();
   }
 
-  render(res, data){
+  outputPage(res, data){
+    var pageObj = this;
     // console.log(data);
-    this.pageData.param = data;
+    pageObj.pageData.param = data;
 
-    // console.log(this.pageData);
-    var htmlStr   = this.htmlStr,
-        pageData  = this.pageData;
     var sql = `
 SELECT *
   FROM (
@@ -42,8 +40,8 @@ SELECT *
         for(var result of results){
           competitions.push(result);
         }
-        pageData.coms = competitions;
-        myFunc.renderEjs(res, htmlStr, pageData);
+        pageObj.pageData.coms = competitions;
+        myFunc.renderEjs(res, pageObj.render());
       }
     );
 

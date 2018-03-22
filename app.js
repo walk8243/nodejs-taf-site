@@ -227,7 +227,7 @@ function onRequest(req, res, data){
     if(req.user){
       req.params.user = req.user;
     }
-    pages[data.server.id][data.page.path].render(res, req.params);
+    pages[data.server.id][data.page.path].outputPage(res, req.params);
   }
   // res.end(data.title);
 }
@@ -435,7 +435,8 @@ These are commands:
 command'page' is usage:
   page [-s <server name>] [-p <path(Forward match)>]
 
-command'sass' [-d <directory path>] [-f <file name>]
+command'sass' is usage:
+  sass [-d <directory path>] [-f <file name>]
 `;
       console.log(message.substring(1));
       break;

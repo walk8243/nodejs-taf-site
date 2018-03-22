@@ -5,12 +5,11 @@ class Index extends Page {
     super();
   }
 
-  render(res, data){
+  outputPage(res, data){
+    var pageObj = this;
     // console.log(data);
-    this.pageData.param = data;
+    pageObj.pageData.param = data;
 
-    var htmlStr   = this.htmlStr,
-        pageData  = this.pageData;
     var sql = `
 SELECT \`years\` AS 'year', COUNT(*) AS 'count'
   FROM (
@@ -37,8 +36,8 @@ SELECT \`years\` AS 'year', COUNT(*) AS 'count'
             comYear.push(result.year);
           }
         }
-        pageData.years = comYear;
-        myFunc.renderEjs(res, htmlStr, pageData);
+        pageObj.pageData.years = comYear;
+        myFunc.renderEjs(res, pageObj.render());
       }
     );
 

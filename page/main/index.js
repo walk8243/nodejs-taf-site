@@ -13,7 +13,7 @@ class Index extends Page {
   //   // console.log(sendData);
   //   this.pageData = Object.assign(this.pageData, sendData);
   //
-  //   myFunc.renderEjs(res, this.htmlStr, this.pageData);
+  //   myFunc.renderEjs(res, this.pageStr, this.pageData);
   // }
 }
 
