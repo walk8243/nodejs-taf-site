@@ -24,36 +24,49 @@ mysqlConnection.query({
   // console.log(results.length);
 
   if(results.length == 0){
-    fs.readFile('install/initial-table.sql', 'utf-8', function(error, sql){
-      if(error){throw error;}
-      // console.log(sql);
-
-      mysqlConnection.query(sql, function(error, results, fields){
+    var promise = new Promise(function(resolve, reject){
+      fs.readFile('install/initial-table.sql', 'utf-8', function(error, sql){
         if(error){throw error;}
-        // console.log(results);
+        // console.log(sql);
 
-        console.error('Table is Completed!');
-        // mysqlConnection.end();
+        mysqlConnection.query(sql, function(error, results, fields){
+          if(error){throw error;}
+          // console.log(results);
+
+          console.error('Table is Completed!');
+          // mysqlConnection.end();
+          resolve();
+        });
       });
     });
 
-    fs.readFile('install/initial-data.sql', 'utf-8', function(error, sql){
-      if(error){throw error;}
-      // console.log(sql);
+    promise.then(function(){
+      return new Promise(function(resolve, reject){
+        fs.readFile('install/initial-data.sql', 'utf-8', function(error, sql){
+          if(error){throw error;}
+          // console.log(sql);
 
-      mysqlConnection.query(sql, function(error, results, fields){
-        if(error){throw error;}
-        // console.log(results);
+          mysqlConnection.query(sql, function(error, results, fields){
+            if(error){throw error;}
+            // console.log(results);
 
-        console.log('Data is Completed!');
-        // mysqlConnection.end();
+            console.log('Data is Completed!');
+            // mysqlConnection.end();
+            resolve();
+          });
+        });
       });
+    }).then(function(){
+      process.exit(0);
+    }).catch(function(){
+      process.exit(1);
     });
   }else{
     var errorMessage = `
 全てのテーブルを削除し、データベースを初期化した上で、実行して下さい。
 `;
     console.log(errorMessage);
+    process.exit(1);
   }
 
   /*

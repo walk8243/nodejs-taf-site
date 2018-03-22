@@ -201,7 +201,7 @@ Promise.all([promise1, promise2]).then(function(){
   });
 }).catch(function(){
   console.error(error.printErrorMessage(101, []));
-  process.exit(0);
+  process.exit(1);
 });
 
 
