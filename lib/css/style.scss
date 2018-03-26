@@ -118,6 +118,13 @@ main {
   a {
     color: $mainColor;
   }
+  table {
+    tr {
+      th, td {
+        padding: 4px 5px;
+      }
+    }
+  }
 
   .container {
     width: auto;
@@ -156,8 +163,50 @@ p {
     }
   }
 
+  &__competition {
+    ul {
+      &>li {
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+      }
+    }
+  }
+
   &__competition\/year {
     .com_list {
+      border-collapse: collapse;
+      &>thead {
+        border-top-width: thin;
+        border-top-style: solid;
+        border-bottom-width: medium;
+        border-bottom-style: double;
+      }
+      &>tbody {
+        border-top-width: thin;
+        border-top-style: solid;
+        border-bottom-width: thin;
+        border-bottom-style: solid;
+        tr {
+          background-color: inherit;
+          cursor: default;
+          &:nth-child(even) {
+            background-color: rgba(39, 53, 74, 0.1);
+          }
+          &:hover {
+            background-color: #{$mainColor}4d;
+          }
+        }
+      }
+      &>thead, &>tbody {
+        tr {
+          td, th {
+            border-left-width: thin;
+            border-left-style: solid;
+            border-right-width: thin;
+            border-right-style: solid;
+          }
+        }
+      }
       .com {
         &__date {
 

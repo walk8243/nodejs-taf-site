@@ -26,8 +26,16 @@
                       let endDate = new Date(com.end);
                   %>
                       <%= startDate.getMonth() + 1 %>/<%= startDate.getDate() %>
-                      - <%= endDate.getMonth() + 1 %>/<%= endDate.getDate() %>
-                  <%
+                    <%
+                      if(startDate.getMonth() == endDate.getMonth()){
+                    %>
+                        - <%= endDate.getDate() %>
+                    <%
+                      }else{
+                    %>
+                        - <%= endDate.getMonth() + 1 %>/<%= endDate.getDate() %>
+                    <%
+                      }
                     }else{
                   %>
                       <%= startDate.getMonth() + 1 %>/<%= startDate.getDate() %>
