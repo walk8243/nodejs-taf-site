@@ -119,9 +119,38 @@ main {
     color: $mainColor;
   }
   table {
-    tr {
-      th, td {
-        padding: 4px 5px;
+    border-collapse: collapse;
+    &>thead {
+      border-top-width: thin;
+      border-top-style: solid;
+      border-bottom-width: medium;
+      border-bottom-style: double;
+    }
+    &>tbody {
+      border-top-width: thin;
+      border-top-style: solid;
+      border-bottom-width: thin;
+      border-bottom-style: solid;
+      tr {
+        background-color: inherit;
+        cursor: default;
+        &:nth-child(even) {
+          background-color: rgba(39, 53, 74, 0.1);
+        }
+        &:hover {
+          background-color: #{$mainColor}4d;
+        }
+      }
+    }
+    &>thead, &>tbody {
+      tr {
+        td, th {
+          padding: 4px 5px;
+          border-left-width: thin;
+          border-left-style: solid;
+          border-right-width: thin;
+          border-right-style: solid;
+        }
       }
     }
   }
@@ -144,6 +173,16 @@ main {
   }
   .title {
     font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  html {
+    font-size: 16px;
+  }
+
+  header, footer {
+    font-size: 18px;
   }
 }
 
@@ -177,39 +216,6 @@ p {
 
   &__competition\/year {
     .com_list {
-      border-collapse: collapse;
-      &>thead {
-        border-top-width: thin;
-        border-top-style: solid;
-        border-bottom-width: medium;
-        border-bottom-style: double;
-      }
-      &>tbody {
-        border-top-width: thin;
-        border-top-style: solid;
-        border-bottom-width: thin;
-        border-bottom-style: solid;
-        tr {
-          background-color: inherit;
-          cursor: default;
-          &:nth-child(even) {
-            background-color: rgba(39, 53, 74, 0.1);
-          }
-          &:hover {
-            background-color: #{$mainColor}4d;
-          }
-        }
-      }
-      &>thead, &>tbody {
-        tr {
-          td, th {
-            border-left-width: thin;
-            border-left-style: solid;
-            border-right-width: thin;
-            border-right-style: solid;
-          }
-        }
-      }
       .com {
         &__date {
 
@@ -224,6 +230,18 @@ p {
           text-align: center;
         }
       }
+    }
+  }
+
+  &__competition\/competition {
+    .sec_result {
+      margin-top: 2rem;
+    }
+    .result__event {
+      margin: 0;
+    }
+    .result__round {
+
     }
   }
 }

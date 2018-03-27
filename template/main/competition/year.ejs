@@ -22,7 +22,7 @@
                 <td class="com__date">
                   <%
                     let startDate = new Date(com.start);
-                    if(com.end != null){
+                    if(com.end != null && com.end != '0000-00-00'){
                       let endDate = new Date(com.end);
                   %>
                       <%= startDate.getMonth() + 1 %>/<%= startDate.getDate() %>

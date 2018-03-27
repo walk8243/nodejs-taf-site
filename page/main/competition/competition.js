@@ -15,11 +15,9 @@ SELECT
   result.id,
   result.result,
   competition.competition,
-  result.event AS 'event_id',
   CONCAT(event.sex, event.event) AS 'event',
-  result.round AS 'round_id',
   round.round,
-  CONCAT(member.name1, '　', member.name2) AS 'member'
+  CONCAT(member.name1, '　', member.name2) AS 'name'
   FROM \`result\`
   INNER JOIN \`competition\` ON result.competition = competition.id
   INNER JOIN \`event\` ON result.event = event.id
@@ -28,6 +26,7 @@ SELECT
   WHERE
     result.competition = ${data.com_id}
       AND result.del_flag = 0
+  ORDER BY result.event, result.round, member.phonetic1, member.phonetic2
 `;
     mysqlConnection.query(
       {
@@ -36,21 +35,26 @@ SELECT
       function(error, results, fields){
         if(error){throw error;}
         // console.log(results);
-        var com_results = {};
+        var com_results = {},
+            eventTmp    = 0,
+            roundTmp    = 0;
         for(var result of results){
-          // com_results.push(result);
-          console.log(result);
-          if(!com_results.hasOwnProperty(result.event_id)){
-            console.log('not');
-            com_results[result.event_id] = {};
-            com_results[result.event_id][result.round_id] = [];
-          }else if(!com_results[result.event_id].hasOwnProperty(result.round_id)){
-            com_results[result.event_id][result.round_id] = [];
+          // console.log(result);
+          if(result.event != eventTmp){
+            // console.log('event');
+            eventTmp = result.event;
+            roundTmp = result.round;
+            com_results[result.event] = {};
+            com_results[result.event][result.round] = [];
+          }else if(result.round != roundTmp){
+            // console.log('round');
+            roundTmp = result.round;
+            com_results[result.event][result.round] = [];
           }
-          com_results[result.event_id][result.round_id].push(result);
+          com_results[result.event][result.round].push(result);
         }
-        pageObj.pageData.results = com_results;
-        console.log(com_results);
+        pageObj.pageData.results  = com_results;
+        // console.log(pageObj.pageData.results);
         myFunc.renderEjs(res, pageObj.render());
       }
     );

@@ -5,10 +5,33 @@
   <div class="container">
     <h1 class="title"><?= page.title ?></h1>
 
-    <% if(results.length > 0){ %>
-      <section>
-        <%= results.length %>
-      </section>
+    <% if(Object.keys(results).length > 0){ _%>
+      <% Object.keys(results).forEach(function(event){ %>
+        <section class="sec_result">
+          <h1 class="result__event"><%= event %></h1>
+          <% Object.keys(results[event]).forEach(function(round){ _%>
+            <% if(round != 'null'){ %>
+              <h3 class="result__round"><%= round %></h3>
+            <% } %>
+            <table class="result__table">
+              <thead>
+                <tr>
+                  <th>名前</th>
+                  <th>記録</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var result of results[event][round]){ %>
+                  <tr class="result">
+                    <td class="result__name"><%= result.name %></td>
+                    <td class="result__result"><%= result.result %></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          <% }) %>
+        </section>
+      <% }) _%>
     <% } %>
   </div>
 </main>

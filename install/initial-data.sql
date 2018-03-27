@@ -100,9 +100,13 @@ INSERT INTO competition (`competition`, `place`, `start`, `end`)
 INSERT INTO member (`name1`, `name2`, `phonetic1`, `phonetic2`, `sex`, `grade`, `degree`, `expert`, `graduate`, `position`)
   VALUES
   ('陸上', '悠真', 'りくじょう', 'ゆうま', '男子', 1, '学位', '短距離', '東京', NULL),
-  ('陸上', '結菜', 'りくじょう', 'ゆうな', '女子', 1, '学位', '短距離', '東京', NULL);
+  ('陸上', '結菜', 'りくじょう', 'ゆうな', '女子', 1, '学位', '短距離', '東京', NULL),
+  ('東京', '悠人', 'りくじょう', 'ゆうと', '男子', 1, '学位', '短距離', '東京', NULL),
+  ('東京', '咲良', 'りくじょう', 'さくら', '女子', 1, '学位', '短距離', '東京', NULL);
 
 INSERT INTO result (`result`, `competition`, `event`, `round`, `member`)
   VALUES
   ('11\"11(+1.0)', 2, 1, NULL, 1),
-  ('12\"03(+1.0)', 2, 2, NULL, 2);
+  ('12\"03(+1.0)', 2, 2, NULL, 2),
+  ('11\"37(+1.0)', 2, 1, NULL, 3),
+  ('12\"21(+1.0)', 2, 2, NULL, 4);
