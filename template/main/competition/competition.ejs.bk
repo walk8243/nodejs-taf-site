@@ -1,0 +1,44 @@
+<?- include(baseDir+'/common/_head') -?>
+
+<?- include(baseDir+'/common/_header') -?>
+<main class="page__<?= page.id ?>">
+  <div class="container">
+    <h1 class="title"><?= page.title ?></h1>
+
+    <section>
+      <% if(results.length > 0){ %>
+        <table>
+          <thead>
+            <th>id</th>
+            <th>result</th>
+            <th>competition</th>
+            <th>event</th>
+            <th>round</th>
+            <th>member</th>
+          </thead>
+          <tbody>
+            <% for(var result of results){ %>
+              <tr>
+                <td><%= result.id %></td>
+                <td><%= result.result %></td>
+                <td><%= result.competition %></td>
+                <td><%= result.event %></td>
+                <td><%= result.round %></td>
+                <td><%= result.member %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+
+    <% if(results.length > 0){ %>
+      <section>
+
+      </section>
+    <% } %>
+  </div>
+</main>
+<?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/common/_foot') -?>

@@ -105,4 +105,4 @@ INSERT INTO member (`name1`, `name2`, `phonetic1`, `phonetic2`, `sex`, `grade`, 
 INSERT INTO result (`result`, `competition`, `event`, `round`, `member`)
   VALUES
   ('11\"11(+1.0)', 2, 1, NULL, 1),
-  ('12\"03(+1.0)', 2, 1, NULL, 2);
+  ('12\"03(+1.0)', 2, 2, NULL, 2);
