@@ -236,12 +236,16 @@ p {
   &__competition\/competition {
     .sec_result {
       margin-top: 2rem;
+      padding-left: 1rem;
     }
     .result__event {
-      margin: 0;
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      margin-left: -1rem;
     }
     .result__round {
-
+      margin-top: 0.5em;
+      margin-bottom: 0.3em;
     }
   }
 }
