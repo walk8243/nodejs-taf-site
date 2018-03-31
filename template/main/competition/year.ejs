@@ -29,11 +29,11 @@
                     <%
                       if(startDate.getMonth() == endDate.getMonth()){
                     %>
-                        - <%= endDate.getDate() %>
+                        <br class="view_sp" />- <%= endDate.getDate() %>
                     <%
                       }else{
                     %>
-                        - <%= endDate.getMonth() + 1 %>/<%= endDate.getDate() %>
+                        <br class="view_sp" />- <%= endDate.getMonth() + 1 %>/<%= endDate.getDate() %>
                     <%
                       }
                     }else{
@@ -67,5 +67,7 @@
   </div>
 </main>
 <?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/competition/_script_year') -?>
 
 <?- include(baseDir+'/common/_foot') -?>

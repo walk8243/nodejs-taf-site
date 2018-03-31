@@ -13,22 +13,24 @@
             <% if(round != 'null'){ %>
               <h3 class="result__round"><%= round %></h3>
             <% } %>
-            <table class="result__table">
-              <thead>
-                <tr>
-                  <th>名前</th>
-                  <th>記録</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for(var result of results[event][round]){ %>
-                  <tr class="result">
-                    <td class="result__name"><%= result.name %></td>
-                    <td class="result__result"><%= result.result %></td>
+            <div class="result__block">
+              <table class="result__table">
+                <thead>
+                  <tr>
+                    <th>名前</th>
+                    <th>記録</th>
                   </tr>
-                <% } %>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <% for(var result of results[event][round]){ %>
+                    <tr class="result">
+                      <td class="result__name"><%= result.name %></td>
+                      <td class="result__result"><%= result.result %></td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
           <% }) %>
         </section>
       <% }) _%>

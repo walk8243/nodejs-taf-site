@@ -7,10 +7,28 @@
   }
 
   &\/year {
+<<<<<<< HEAD
     .com_list {
       .com {
         &__date {
 
+=======
+    section {
+      @media screen and (max-width: 1099px){
+        overflow-x: scroll;
+      }
+    }
+    .com_list {
+      @media screen and (max-width: 1099px){
+        width: 200%;
+      }
+      .com {
+        &__date {
+          @media screen and (max-width: 1099px){
+            width: auto;
+            max-width: 75px;
+          }
+>>>>>>> head
         }
         &__competition {
 
@@ -39,5 +57,13 @@
       margin-top: 0.5em;
       margin-bottom: 0.3em;
     }
+<<<<<<< HEAD
+=======
+    .result__block {
+      @media screen and (max-width: 1099px){
+        overflow-x: scroll;
+      }
+    }
+>>>>>>> head
   }
 }
