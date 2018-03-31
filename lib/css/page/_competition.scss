@@ -1,0 +1,43 @@
+&__competition {
+  ul {
+    &>li {
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
+    }
+  }
+
+  &\/year {
+    .com_list {
+      .com {
+        &__date {
+
+        }
+        &__competition {
+
+        }
+        &__place {
+
+        }
+        &__link {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  &\/competition {
+    .sec_result {
+      margin-top: 2rem;
+      padding-left: 1rem;
+    }
+    .result__event {
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      margin-left: -1rem;
+    }
+    .result__round {
+      margin-top: 0.5em;
+      margin-bottom: 0.3em;
+    }
+  }
+}

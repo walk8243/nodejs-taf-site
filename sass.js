@@ -3,6 +3,7 @@ var sass  = require('node-sass');
 class Sass {
   constructor(){
     this.sassList = [];
+    this.regexp   = new RegExp('^(.+/)+(?!_)\\w+\\.(sass|scss)$');
   }
 
   compile(path = './lib'){
@@ -32,13 +33,13 @@ class Sass {
           if(file.isDirectory()){
             this.searchSass(filePath);
           }else if(file.isFile()){
-            if(filePath.match(/\.(sass|scss)$/)){
+            if(filePath.match(this.regexp)){
               this.addCompileFile(filePath);
             }
           }
         }
       }else if(fs.statSync(path).isFile()){
-        if(path.match(/\.(sass|scss)$/)){
+        if(path.match(this.regexp)){
           this.addCompileFile(path);
         }
       }
