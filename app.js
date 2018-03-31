@@ -3,7 +3,8 @@ const express = require('express'),
       vhost   = require('vhost'),
       mysql   = require('mysql'),
       yaml    = require('js-yaml'),
-      config  = require('config');
+      config  = require('config'),
+      favicon = require('serve-favicon');
 
 ejs     = require('ejs'),
 fs      = require('fs'),
@@ -38,7 +39,7 @@ mysqlConnection = mysql.createConnection({
   timezone: 'UTC'
 });
 
-var promise1, promise2;
+var promise1, promise2, promise3;
 promise1 = new Promise(function(resolve, reject){
   // ウェブサイトで使用する定数を記憶
   siteDefine = {};
@@ -65,8 +66,13 @@ promise2 = new Promise(function(resolve, reject){
   sass.compile();
   resolve();
 });
+promise3 = new Promise(function(resolve, reject){
+  // faviconの設定
+  app.use(favicon('./lib/img/favicon.ico'));
+  resolve();
+});
 
-Promise.all([promise1, promise2]).then(function(){
+Promise.all([promise1, promise2, promise3]).then(function(){
   // サーバの設置、構築
   return new Promise(function(resolve, reject){
     // libサーバの設置
