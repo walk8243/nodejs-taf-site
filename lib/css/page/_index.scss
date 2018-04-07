@@ -7,6 +7,13 @@
     width: 100%;
   }
   .nav {
+<<<<<<< HEAD
+=======
+    @media screen and (min-width: 1100px){
+      display: none;
+    }
+
+>>>>>>> head
     ul {
       display: grid;
       grid-template-columns: 1fr 1fr;
