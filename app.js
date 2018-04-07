@@ -446,6 +446,9 @@ command'sass' is usage:
 `;
       console.log(message.substring(1));
       break;
+    case 'exit': case 'quit':
+      process.exit(0);
+      break;
     default: break;
   }
 }
