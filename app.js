@@ -56,7 +56,7 @@ promise1 = new Promise(function(resolve, reject){
       for(var result of results){
         siteDefine[result['index']] = result['value'];
       }
-      console.log(siteDefine);
+      // console.log(siteDefine);
       resolve();
     }
   );
@@ -462,6 +462,7 @@ function createSendData(server, path){
       path  : path
     },
     var     : route[server.name][path].var,
-    lib     : `http://lib.${hostname}:${portNo}`
+    lib     : `http://lib.${hostname}:${portNo}`,
+    define  : siteDefine
   }
 }
