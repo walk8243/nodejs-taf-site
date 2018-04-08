@@ -1,0 +1,45 @@
+&__member {
+  a {
+    text-decoration: none;
+  }
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin-top: 0;
+    padding-left: 0;
+    @media screen and (max-width: 749px){
+      grid-template-columns: 1fr;
+    }
+    .member {
+      $imgSize: 100px;
+      display: grid;
+      grid-template-columns: #{$imgSize} 1fr;
+      &:hover {
+        background: #{$mainColor}4d;
+      }
+      &, &>.img, &>.des {
+        height: #{$imgSize};
+      }
+      .des {
+        display: grid;
+        grid-template-rows: 1fr auto;
+        padding: 10px 10px;
+      }
+      * {
+        text-decoration: none;
+      }
+
+      &__name {
+        color: $fontColor;
+        font-size: 2rem;
+      }
+      &__belong {
+        color: $fontColor__light2;
+      }
+    }
+  }
+  .grade {
+    margin-bottom: 0;
+  }
+}

@@ -6,6 +6,7 @@ $linkBarColor: #d04255;
 $linkBarColor__light: #f6d4d8;
 $fontColor: #27354a;
 $fontColor__light: $backColor;
+$fontColor__light2: rgba(39, 53, 74, 0.7);
 
 $headerWidth: 350px;
 
@@ -43,6 +44,10 @@ body {
 
 header, footer {
   overflow: hidden;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
   @media screen and (min-width: 1201px){
     font-size: 18px;
   }

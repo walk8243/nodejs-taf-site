@@ -1,0 +1,54 @@
+<%
+  var now = new Date();
+  var nowYear = now.getFullYear();
+_%>
+<?- include(baseDir+'/common/_head') -?>
+
+<?- include(baseDir+'/common/_header') -?>
+<main class="page__<?= page.id ?>">
+  <div class="container">
+    <h1 class="title"><?= page.title ?></h1>
+
+    <% if(Object.keys(members).length > 0){ %>
+      <% Object.keys(members).forEach(function(level){ %>
+        <% var grade = Number(nowYear) - Number(level) - Number(define.club_start) + 2 %>
+        <section>
+          <% if(level <= 4){ %>
+            <h1 class="grade"><%= level %>回（<%= grade %>期）</h1>
+          <% }else if(level == 5){ %>
+            <h1 class="grade">5回以上</h1>
+          <% }else if(level == 6){ %>
+            <h1 class="grade">院生</h1>
+          <% } %>
+          <ul>
+            <% for(var member of members[level]){ %>
+              <a href="/member/<%= member.id %>">
+                <li class="member">
+                  <div class="img">
+                    <% if(member.image){ %>
+                      <p><%= member.image %></p>
+                    <% }else{ %>
+                      <img src="<?= lib ?>/img/face.jpg" />
+                    <% } %>
+                  </div>
+                  <div class="des">
+                    <p class="member__name"><%= member.name %></p>
+                    <p class="member__belong">
+                      <%= member.expert %>
+                      <% if(member.position){ %>
+                        - <%= member.position %>
+                      <% } %>
+                    </p>
+                  </div>
+                </li>
+              </a>
+            <% } %>
+          </ul>
+        </section>
+      <% }) %>
+    <% } %>
+  </div>
+</main>
+<?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/common/_foot') -?>

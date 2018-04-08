@@ -86,7 +86,8 @@ INSERT INTO constant (`index`, `value`, `comment`)
   VALUES
   ('club_name', '偽津斗大学陸上競技部', '部活名'),
   ('admin_member', 'NULL', '管理者（member_id）'),
-  ('admin_mail', 'NULL', '管理者メールアドレス');
+  ('admin_mail', 'NULL', '管理者メールアドレス'),
+  ('club_start', '2010', '部活動の始まった年');
 
 INSERT INTO competition (`competition`, `place`, `start`, `end`)
   VALUES
@@ -97,12 +98,17 @@ INSERT INTO competition (`competition`, `place`, `start`, `end`)
   ('第1回体育大学長距離競技会', 'ヤンマーフィールド長居', '2017-04-02', NULL),
   ('第1回陸連記録会', 'ヤンマーフィールド長居', '2018-03-10', '2018-03-11');
 
-INSERT INTO member (`name1`, `name2`, `phonetic1`, `phonetic2`, `sex`, `grade`, `degree`, `expert`, `graduate`, `position`)
+INSERT INTO member (`name1`, `name2`, `phonetic1`, `phonetic2`, `sex`, `grade`, `year`, `degree`, `expert`, `graduate`, `position`)
   VALUES
-  ('陸上', '悠真', 'りくじょう', 'ゆうま', '男子', 1, '学位', '短距離', '東京', NULL),
-  ('陸上', '結菜', 'りくじょう', 'ゆうな', '女子', 1, '学位', '短距離', '東京', NULL),
-  ('東京', '悠人', 'りくじょう', 'ゆうと', '男子', 1, '学位', '短距離', '東京', NULL),
-  ('東京', '咲良', 'りくじょう', 'さくら', '女子', 1, '学位', '短距離', '東京', NULL);
+  ('陸上', '悠真', 'りくじょう', 'ゆうま', '男子', 7, 3, '学位', '短距離', '東京', '主将'),
+  ('陸上', '結菜', 'りくじょう', 'ゆうな', '女子', 7, 3, '学位', '短距離', '東京', '渉外'),
+  ('東京', '悠人', 'とうきょう', 'ゆうと', '男子', 7, 3, '学位', '短距離', '東京', '副将'),
+  ('東京', '咲良', 'とうきょう', 'さくら', '女子', 7, 3, '学位', '短距離', '東京', '副将'),
+  ('幹部', '蓮', 'かんぶ', 'れん', '男子', 8, 2, '学位', '長距離', '横浜', NULL),
+  ('幹部', '結衣', 'かんぶ', 'ゆい', '女子', 8, 2, '学位', '長距離', '横浜', NULL),
+  ('星野', '陽翔', 'ほしの', 'はると', '男子', 5, 5, '学位', '投擲', '埼玉', NULL),
+  ('水卜', '莉子', 'みうら', 'りこ', '女子', 5, 1, '修士', '跳躍', '埼玉', NULL),
+  ('水卜', '心愛', 'みうら', 'ここあ', '女子', 3, 1, '博士', '跳躍', '埼玉', NULL);
 
 INSERT INTO result (`result`, `competition`, `event`, `round`, `member`)
   VALUES
