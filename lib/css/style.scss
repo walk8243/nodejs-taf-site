@@ -15,10 +15,7 @@ html {
   font-size: 18px;
   background: $backColor;
 
-  @media screen and (max-width: 1099px){
-    font-size: 16px;
-  }
-  @media screen and (min-width: 1201px) {
+  @media screen and (max-width: 750px) {
     font-size: 16px;
   }
 
