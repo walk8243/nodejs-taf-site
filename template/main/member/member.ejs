@@ -1,0 +1,21 @@
+<%
+  var now = new Date();
+  var nowYear = now.getFullYear();
+_%>
+<?- include(baseDir+'/common/_head') -?>
+
+<?- include(baseDir+'/common/_header') -?>
+<main class="page__<?= page.id ?>">
+  <div class="container">
+    <h1 class="title"><?= page.title ?></h1>
+
+    <% if(member.length > 0){ %>
+      <% Object.keys(member[0]).forEach(function(key){ %>
+        <p class="<%= key %>"><%= member[0][key] %></p>
+      <% }); %>
+    <% } %>
+  </div>
+</main>
+<?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/common/_foot') -?>
