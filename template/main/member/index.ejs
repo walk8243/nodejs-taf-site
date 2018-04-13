@@ -14,15 +14,15 @@ _%>
         <% var grade = Number(nowYear) - Number(level) - Number(define.club_start) + 2 %>
         <section>
           <% if(level <= 4){ %>
-            <h1 class="grade"><%= level %>回（<%= grade %>期）</h1>
+            <h1 class="grade"><%= level %>回生（<%= grade %>期）</h1>
           <% }else if(level == 5){ %>
-            <h1 class="grade">5回以上</h1>
+            <h1 class="grade">5回生以上</h1>
           <% }else if(level == 6){ %>
             <h1 class="grade">院生</h1>
           <% } %>
           <ul>
             <% for(var member of members[level]){ %>
-              <a href="/member/<%= member.id %>">
+              <a href="/member/member/<%= member.id %>">
                 <li class="member">
                   <div class="img">
                     <% if(member.image){ %>
