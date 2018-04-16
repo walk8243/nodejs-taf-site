@@ -13,7 +13,7 @@ _%>
       <ul class="grade_list">
         <% Object.keys(members).forEach(function(level){ %>
           <li>
-            <a class="scroll_tag" href="#grade-<%= level %>">
+            <a class="scroll_tag" scroll="#grade-<%= level %>">
               <% if(level <= 4){ %>
                 <%= level %>回生
               <% }else if(level == 5){ %>
