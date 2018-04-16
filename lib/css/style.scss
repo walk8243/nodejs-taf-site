@@ -269,6 +269,12 @@ p {
   margin: 0;
 }
 
+a {
+  &.scroll_tag {
+    cursor: pointer;
+  }
+}
+
 .view_sp {
   display: none;
 

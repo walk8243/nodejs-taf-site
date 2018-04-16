@@ -10,17 +10,35 @@ _%>
     <h1 class="title"><?= page.title ?></h1>
 
     <% if(Object.keys(members).length > 0){ %>
+      <ul class="grade_list">
+        <% Object.keys(members).forEach(function(level){ %>
+          <li>
+            <a class="scroll_tag" href="#grade-<%= level %>">
+              <% if(level <= 4){ %>
+                <%= level %>回生
+              <% }else if(level == 5){ %>
+                5回生以上
+              <% }else if(level == 6){ %>
+                院生
+              <% } %>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+
       <% Object.keys(members).forEach(function(level){ %>
         <% var grade = Number(nowYear) - Number(level) - Number(define.club_start) + 2 %>
-        <section>
-          <% if(level <= 4){ %>
-            <h1 class="grade"><%= level %>回生（<%= grade %>期）</h1>
-          <% }else if(level == 5){ %>
-            <h1 class="grade">5回生以上</h1>
-          <% }else if(level == 6){ %>
-            <h1 class="grade">院生</h1>
-          <% } %>
-          <ul>
+        <section id="grade-<%= level %>" name="grade-<%= level %>">
+          <h3 class="grade">
+            <% if(level <= 4){ %>
+              <%= level %>回生（<%= grade %>期）
+            <% }else if(level == 5){ %>
+              5回生以上
+            <% }else if(level == 6){ %>
+              院生
+            <% } %>
+          </h3>
+          <ul class="member_list">
             <% for(var member of members[level]){ %>
               <a href="/member/member/<%= member.id %>">
                 <li class="member">
