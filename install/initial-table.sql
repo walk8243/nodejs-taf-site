@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS member (
   `grade` INT(3) COMMENT '期生',
   `year` INT(1) COMMENT '学年',
   `degree` ENUM('学位', '修士', '博士') DEFAULT '学位' COMMENT '学位',
+  `depart` ENUM('法学部', '教育学部', '工学部', '理学部', '経済学部', '法学系研究科', '教育学研究科', '工学系研究科', '理学系研究科', '経済学研究科') COMMENT '学部・研究科等',
   `expert` VARCHAR(32) COMMENT '専門',
   `graduate` VARCHAR(64) COMMENT '出身高校',
   `position` VARCHAR(64) DEFAULT NULL COMMENT '幹部役職',
