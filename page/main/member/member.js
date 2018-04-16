@@ -37,7 +37,7 @@ SELECT
         for(var result of results){
           member.push(result);
         }
-        pageObj.pageData.member = member;
+        pageObj.pageData.members = member;
         myFunc.renderEjs(res, pageObj.render());
       }
     );

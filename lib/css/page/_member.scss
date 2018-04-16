@@ -42,4 +42,25 @@
   .grade {
     margin-bottom: 0;
   }
+
+  &\/member {
+    .prof {
+      text-align: center;
+
+      &__name {
+        font-size: 2rem;
+      }
+      &__phonetic {
+        font-size: 0.8rem;
+      }
+      &__table {
+        margin: 3rem auto 0;
+        width: auto;
+        max-width: 100%;
+        td {
+          text-align: left;
+        }
+      }
+    }
+  }
 }

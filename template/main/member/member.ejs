@@ -1,6 +1,6 @@
 <%
-  var now = new Date();
-  var nowYear = now.getFullYear();
+  var now = new Date(),
+      nowYear = now.getFullYear();
 _%>
 <?- include(baseDir+'/common/_head') -?>
 
@@ -9,10 +9,50 @@ _%>
   <div class="container">
     <h1 class="title"><?= page.title ?></h1>
 
-    <% if(member.length > 0){ %>
-      <% Object.keys(member[0]).forEach(function(key){ %>
-        <p class="<%= key %>"><%= member[0][key] %></p>
-      <% }); %>
+    <% if(members.length > 0){ %>
+      <% var member = members[0]; %>
+      <section class="prof">
+        <div>
+          <% if(member.image){ %>
+            <p><%= member.image %></p>
+          <% }else{ %>
+            <img src="<?= lib ?>/img/face.jpg" />
+          <% } %>
+        </div>
+        <p class="prof__name"><%= member.name %></p>
+        <p class="prof__phonetic"><%= member.phonetic %></p>
+
+        <table class="prof__table">
+          <tbody>
+            <tr>
+              <th>学年</th>
+              <td class="prof__grade">
+                <% if(member.degree == '学位'){ %>
+                  学部 <%= member.year %>回
+                <% }else if(member.degree == '修士'){ %>
+                  修士課程 <%= member.year %>回
+                <% }else if(member.degree == '博士'){ %>
+                  博士課程 <%= member.year %>回
+                <% } %>
+              </td>
+            </tr>
+            <% if(member.position){ %>
+              <tr>
+                <th>幹部役職</th>
+                <td class="prof__position"><%= member.position %></td>
+              </tr>
+            <% } %>
+            <tr>
+              <th>専門</th>
+              <td class="prof__expert"><%= member.expert %></td>
+            </tr>
+            <tr>
+              <th>出身校</th>
+              <td class="prof__graduate"><%= member.graduate %></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     <% } %>
   </div>
 </main>
