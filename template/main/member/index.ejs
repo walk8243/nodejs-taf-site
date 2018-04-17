@@ -28,7 +28,7 @@ _%>
 
       <% Object.keys(members).forEach(function(level){ %>
         <% var grade = Number(nowYear) - Number(level) - Number(define.club_start) + 2 %>
-        <section id="grade-<%= level %>" name="grade-<%= level %>">
+        <section id="grade-<%= level %>">
           <h3 class="grade">
             <% if(level <= 4){ %>
               <%= level %>回生（<%= grade %>期）
