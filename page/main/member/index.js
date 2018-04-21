@@ -15,14 +15,14 @@ SELECT
   \`id\`,
   CONCAT(\`name1\`, ' ', \`name2\`) AS 'name',
   CONCAT(\`phonetic1\`, ' ', \`phonetic2\`) AS 'phonetic',
-  \`year\`,
   \`degree\`,
+  YEAR(NOW()) - \`admission\` + 1 AS \`year\`,
   \`image\`,
   \`expert\`,
   \`position\`
   FROM \`member\`
   WHERE \`del_flag\` = 0
-  ORDER BY \`degree\`, \`grade\` DESC, \`phonetic\`
+  ORDER BY \`degree\`, \`admission\` DESC, \`phonetic\`
 `;
     mysqlConnection.query(
       {
