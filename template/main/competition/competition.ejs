@@ -3,7 +3,11 @@
 <?- include(baseDir+'/common/_header') -?>
 <main class="page__<?= page.id ?>">
   <div class="container">
-    <h1 class="title"><?= page.title ?></h1>
+    <h1 class="title competition_name"><%= comInfo.competition %></h1>
+    <ul class="competition_info">
+      <li>日時：<%= comInfo.date %></li>
+      <li>場所：<%= comInfo.place %></li>
+    </ul>
 
     <% if(Object.keys(results).length > 0){ _%>
       <% Object.keys(results).forEach(function(event){ %>

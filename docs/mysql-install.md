@@ -66,8 +66,27 @@ mysql -u root -p
 ```
 status;
 show databases;
-create database test;
-select * from INFORMATION_SCHEMA.SCHEMATA;
+create database [test_db];
+select * from INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='[test_db]';
 ```
-で、MySQLの設定や、作成したデータベースのデフォルトの文字コードに間違いがないかどうか確認して下さい。  
+で、MySQLの設定や、作成したデータベース(`[test_db]`)のデフォルトの文字コードに間違いがないかどうか確認して下さい。  
 問題がなければ、設定は完了です。
+
+## 本サイト用ユーザの作成
+サイトの管理用のユーザは **root** や、他のサイトで使用しているユーザでも可能です。  
+しかし、他のサイトで使用しているユーザが乗っ取られた際に、本サイトまでアクセス出来るなど、セキュリティ上あまりよろしくありません。  
+そのため、新しく本サイト用のユーザを作成しましょう。
+
+以下のコードは、mysqlに **root** でログイン後に実行して下さい。  
+作成するユーザ名を`[test_user]`、そのユーザのパスワードを`[password]`としています。
+```
+CREATE USER '[test_user]'@'localhost' IDENTIFIED BY '[password]';
+SELECT User, Host FROM mysql.user;
+```
+
+ユーザの作成が確認出来れば、次はユーザの権限を変更します。
+```
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, CREATE VIEW, SHOW VIEW, REFERENCES ON `[test_db]`.* TO '[test_user]'@'localhost';
+SHOW GRANTS FOR '[test_user]'@'localhost';
+```
+新しく作成したユーザの権限が確認出来れば、設定は完了です。
