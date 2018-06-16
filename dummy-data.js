@@ -202,21 +202,25 @@ function createDummyResultData() {
 
   var i = 0;
   while(true) {
-    i += getRandomInt(5) + 1;
+    i += getRandomInt(3) + 1;
     if(i > counter.member) {break;}
     // console.log(i);
-    let createValue = [],
-        resultStr   = (getRandomInt(200) + 1000).toString(),
-        windNumber  = (getRandomInt(50) - 20) / 10;
-        windStr     = windNumber>0 ? `+${windNumber.toFixed(1)}` : windNumber.toFixed(1);
+    let flag = true;
+    while(getRandomInt(2) || flag) {
+      let createValue = [],
+          resultStr   = (getRandomInt(200) + 1000).toString(),
+          windNumber  = (getRandomInt(50) - 20) / 10;
+          windStr     = windNumber>0 ? `+${windNumber.toFixed(1)}` : windNumber.toFixed(1);
+      flag = false;
 
-    createValue.push(`'${resultStr.substr(0, 2)}"${resultStr.substr(2)}(${windStr})'`);
-    createValue.push(getRandomInt(counter.competition) + 1);
-    createValue.push(1);
-    createValue.push(i);
-    createValue.push(windNumber<=2.0 ? Number(resultStr) : 'NULL');
-    // console.log(createValue);
-    createArray.push('  (' + createValue.join(', ') + ')');
+      createValue.push(`'${resultStr.substr(0, 2)}"${resultStr.substr(2)}(${windStr})'`);
+      createValue.push(getRandomInt(counter.competition) + 1);
+      createValue.push(1);
+      createValue.push(i);
+      createValue.push(windNumber<=2.0 ? Number(resultStr) : 'NULL');
+      // console.log(createValue);
+      createArray.push('  (' + createValue.join(', ') + ')');
+    }
   }
 
   var dummyCompetitionDataSql  = "INSERT INTO result (`result`, `competition`, `event`, `member`, `record`)\n";
