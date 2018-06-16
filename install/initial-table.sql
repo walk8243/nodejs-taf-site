@@ -161,6 +161,7 @@ CREATE OR REPLACE
       SELECT event, member, MIN(record) AS min_record
         FROM result
         WHERE del_flag IS FALSE
+          AND record IS NOT NULL
         GROUP BY event, member
     ) record
       ON result.event=record.event
