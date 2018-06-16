@@ -19,3 +19,6 @@
 # test用ファイルを無視する
 /test.js
 /mysql.js
+
+# コンパイル結果のものを無視する
+/install/dummy-data.sql
