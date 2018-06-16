@@ -32,6 +32,7 @@
     "mysql": "^2.15.0",
     "node-sass": "^4.9.0",
     "serve-favicon": "^2.5.0",
+    "tunnel-agent": "^0.6.0",
     "vhost": "^3.0.2"
   },
   "devDependencies": {}
