@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS result (
   `event` INT(5) COMMENT '種目',
   `round` INT(2) DEFAULT NULL COMMENT 'ラウンド',
   `member` INT(11) COMMENT '部員',
+  `record` INT(8) DEFAULT NULL COMMENT '記録',
   `del_flag` BOOLEAN DEFAULT false COMMENT '削除フラッグ',
 
   FOREIGN KEY (`competition`)
@@ -148,3 +149,21 @@ CREATE TABLE IF NOT EXISTS constant (
   `value` VARCHAR(128) NOT NULL COMMENT '値',
   `comment` VARCHAR(1024) DEFAULT NULL COMMENT '説明'
 );
+
+
+-- VIEWの作成
+CREATE OR REPLACE
+  ALGORITHM = TEMPTABLE
+  VIEW record
+  AS SELECT result.id, result.result, result.competition, result.event, result.member, record.min_record
+    FROM result
+    INNER JOIN (
+      SELECT event, member, MIN(record) AS min_record
+        FROM result
+        WHERE del_flag IS FALSE
+        GROUP BY event, member
+    ) record
+      ON result.event=record.event
+        AND result.member=record.member
+        AND result.record=record.min_record
+    ORDER BY result.event, result.record;

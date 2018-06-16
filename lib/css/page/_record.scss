@@ -1,0 +1,27 @@
+&__record {
+  & {
+    section {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 50px;
+
+      .event_list {
+        .event_list {
+          &__title {
+            margin: 0;
+          }
+          &__body {
+            &.gender {
+              &__man {
+                // grid-column: 1 / 2;
+              }
+              &__woman {
+                // grid-column: -2 / -1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

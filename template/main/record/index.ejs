@@ -1,0 +1,30 @@
+<%
+  var now = new Date();
+  var nowYear = now.getFullYear();
+_%>
+<?- include(baseDir+'/common/_head') -?>
+
+<?- include(baseDir+'/common/_header') -?>
+<main class="page__<?= page.id ?>">
+  <div class="container">
+    <h1 class="title"><?= page.title ?></h1>
+
+    <section>
+      <% ['man', 'woman'].forEach((genderCode) => { %>
+        <% if(Object.keys(events[genderCode]).length > 0) { %>
+          <div class="event_list">
+            <h3 class="event_list__title"><%= gender[genderCode] %></h3>
+            <ul class="event_list__body gender__<%= genderCode %>">
+              <% for(let event of events[genderCode]) { %>
+                <li><a href="<?= page.path ?>/<%= genderCode %>#<%= event.id %>"><%= event.name %></a></li>
+              <% } %>
+            </ul>
+          </div>
+        <% } %>
+      <% }); %>
+    </section>
+  </div>
+</main>
+<?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/common/_foot') -?>

@@ -1,0 +1,37 @@
+<%
+  var now = new Date();
+  var nowYear = now.getFullYear();
+_%>
+<?- include(baseDir+'/common/_head') -?>
+
+<?- include(baseDir+'/common/_header') -?>
+<main class="page__<?= page.id ?>">
+  <div class="container">
+    <h1 class="title"><?= page.title ?>（<%= gender %>）</h1>
+
+    <section>
+      <p>
+        歴代記録ページだよー
+      </p>
+    </section>
+    <% if(Object.keys(recordsByEvent).length > 0) { %>
+      <% var eventInfo = {} %>
+      <% for(let records of recordsByEvent) { %>
+        <% eventInfo = records.shift(); %>
+        <% if(Object.keys(records).length > 0) { %>
+          <section id="<%= eventInfo.id %>" name="<%= eventInfo.id %>">
+            <h3 class="event_title"><%= eventInfo.name %></h3>
+            <ul>
+              <% for(let record of records) { %>
+                <li><%= record.result %></li>
+              <% } %>
+            </ul>
+          </section>
+        <% } %>
+      <% } %>
+    <% } %>
+  </div>
+</main>
+<?- include(baseDir+'/common/_footer') -?>
+
+<?- include(baseDir+'/common/_foot') -?>
